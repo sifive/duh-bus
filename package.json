@@ -1,0 +1,25 @@
+{
+  "name": "duh-bus",
+  "version": "0.1.0",
+  "description": "Bus definition DUH documents",
+  "main": "lib/index.js",
+  "bin": {
+    "duh-bus-which": "bin/which.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sifive/duh-bus.git"
+  },
+  "author": "SiFive",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sifive/duh-bus/issues"
+  },
+  "homepage": "https://github.com/sifive/duh-bus#readme",
+  "devDependencies": {
+    "fs-extra": "^7.0.1"
+  }
+}
