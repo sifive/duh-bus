@@ -7,7 +7,7 @@
     "duh-bus-which": "bin/which.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint index.js && nyc -r=text -r=lcov mocha"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,18 @@
   "bugs": {
     "url": "https://github.com/sifive/duh-bus/issues"
   },
+  "engines": {
+    "node": ">=6"
+  },
   "homepage": "https://github.com/sifive/duh-bus#readme",
+  "eslintConfig": {
+    "extends": "@drom/eslint-config/eslint4/node8"
+  },
   "devDependencies": {
-    "fs-extra": "^7.0.1"
+    "@drom/eslint-config": "^0.10.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.14.1",
+    "mocha": "^6.1.4",
+    "nyc": "^14.0.0"
   }
 }
