@@ -15,7 +15,9 @@ module.exports = {
     }
   },
   'intel.com': {
-    PHY: {'4.4.0': require('./specs/intel.com/PHY/4.4.0/PIPE_rtl.json5')}
+    PHY: {
+      PIPE: {'4.4.0': require('./specs/intel.com/PHY/4.4.0/PIPE_rtl.json5')}
+    }
   },
   'sifive.com': {
     MEM: {
