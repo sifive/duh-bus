@@ -40,6 +40,16 @@
 
 // PIPE Common to all lanes
 
+
+       RESETN: {
+          description: 'Resets the transmitter and receiver.',
+          wire: {
+            onMaster: {direction:'out',
+                       width: 1},
+            onSlave: {direction:'in',
+                      width: 1}
+          },
+       },
        POWERDOWN: {
           description: 'Forces TX output to electrical idle',
           wire: {
@@ -53,11 +63,9 @@
           description: 'Link signalling rate',
           wire: {
             onMaster: {direction:'out',
-                       width: 2,
-                       presence:'optional'},
+                       width: 2},
             onSlave: {direction:'in',
-                      width: 2,
-                      presence:'optional'}
+                      width: 2}
           },
        },
        TXMARGIN: {
@@ -389,14 +397,70 @@
       PLLRATE: {
           description: 'PLDA controller specific signal, seem to be the same as PCLKRATE. Only used when PCLK is an input to the PHY',
           wire: {
+            onMaster: {direction:'in',
+                       presence:'optional'},
+            onSlave: {direction:'out',
+                      presence:'optional'}
+          },
+       },
+      PLLACK: {
+          description: 'PLDA controller specific signal, PCLKRATE change acknowledge. Only used when PCLK is an input to the PHY',
+          wire: {
+            onMaster: {direction:'in',
+                       presence:'optional'},
+            onSlave: {direction:'out',
+                      presence:'optional'}
+          },
+       },
+      RXEIDETECTDISABLE: {
+          description: 'Asynchronously disables the RX Electrical Idle detect logic',
+          wire: {
             onMaster: {direction:'out',
                        presence:'optional'},
             onSlave: {direction:'in',
                       presence:'optional'}
           },
        },
-      PLLACK: {
-          description: 'PLDA controller specific signal, PCLKRATE change acknowledge. Only used when PCLK is an input to the PHY',
+      TXCOMMONMODEDISABLE: {
+          description: 'Asynchronously disables the transmitter DC common mode logic',
+          wire: {
+            onMaster: {direction:'out',
+                       presence:'optional'},
+            onSlave: {direction:'in',
+                      presence:'optional'}
+          },
+       },
+      RXEQTRAINING: {
+          description: 'RX to bypass normal operation to perform equalization training. USB only.',
+          wire: {
+            onMaster: {direction:'out',
+                       presence:'optional'},
+            onSlave: {direction:'in',
+                      presence:'optional'}
+          },
+       },
+      TXONESZEROS: {
+          description: 'Used to instruct the receiver to bypass normal operation to perform equalization training. USB only.',
+          wire: {
+            onMaster: {direction:'out',
+                       presence:'optional'},
+            onSlave: {direction:'in',
+                      presence:'optional'}
+          },
+       },
+      TXPATTERN: {
+          description: 'Controls which pattern the PHY sends. SATA only.',
+          wire: {
+            onMaster: {direction:'out',
+                       width: 2,
+                       presence:'optional'},
+            onSlave: {direction:'in',
+                      width: 2,
+                      presence:'optional'}
+          },
+       },
+      ALIGNDETECT: {
+          description: 'Indicates receiver detection of an Align. SATA only.',
           wire: {
             onMaster: {direction:'in',
                        presence:'optional'},
