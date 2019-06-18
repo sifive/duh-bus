@@ -7,7 +7,7 @@
     busType: {
       vendor: 'amba.com',
       library: 'AMBA4',
-      name: 'AXI4Lite',
+      name: 'AXI4-Lite',
       version: 'r0p0_0',
     },
     ports: {
