@@ -24,7 +24,7 @@ function walker (cb, root) {
 
 function exporter (path) {
   const arr = path.split('/');
-  const res = 'xassign([' + arr.map(e => `'${e}'`).join(', ') + '])(';
+  const res = '\nxassign([' + arr.map(e => `'${e}'`).join(', ') + '])(';
   return res;
 }
 

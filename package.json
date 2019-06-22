@@ -7,7 +7,7 @@
     "duh-bus-which": "bin/which.js"
   },
   "scripts": {
-    "test": "eslint index.js && nyc -r=text -r=lcov mocha",
+    "test": "eslint bin && nyc -r=text -r=lcov mocha",
     "prepublish": "node bin/indexer.js"
   },
   "repository": {

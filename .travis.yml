@@ -16,5 +16,5 @@ install:
   - npm --version
   - npm install
 script:
-  - ls
+  - ls -l
   - npm test
