@@ -29,19 +29,20 @@ function exporter (path) {
 }
 
 function main () {
-  console.log(`'use strict';
+  fs.writeFile('./index.js', `'use strict';
 
 const xassign = path => obj =>
   Object.assign(path.reduce((res, cur) =>
     res[cur] || (res[cur] = {}), exports), obj);
-`);
+`, 'utf8');
+
   const root = path.resolve(process.cwd(), 'specs');
   fs.pathExists(root).then(exists => {
     if (exists) {
       walker((short, full) => {
         fs.readFile(full, 'utf8').then(body => {
           json5.parse(body);
-          console.log(exporter(short) + body + ');\n');
+          fs.appendFile('./index.js', exporter(short) + body + ');\n');
         });
       }, root)(root);
     }
