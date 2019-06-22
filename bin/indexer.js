@@ -22,8 +22,8 @@ function walker (cb, root) {
   };
 }
 
-function exporter (path) {
-  const arr = path.split(/[/|\\]/);
+function exporter (p) {
+  const arr = p.split(path.sep);
   arr[arr.length - 1] = arr[arr.length - 1].split(/[.|_]/)[0];
   const res = '\nxassign([' + arr.map(e => `'${e}'`).join(', ') + '])(\n';
   return res;
@@ -32,8 +32,8 @@ function exporter (path) {
 function main () {
   fs.writeFile('./index.js', `'use strict';
 
-const xassign = path => obj =>
-  Object.assign(path.reduce((res, cur) =>
+const xassign = p => obj =>
+  Object.assign(p.reduce((res, cur) =>
     res[cur] || (res[cur] = {}), exports), obj);
 `, 'utf8');
 
