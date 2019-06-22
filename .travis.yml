@@ -15,4 +15,6 @@ sudo: false
 install:
   - npm --version
   - npm install
-script: npm test
+script:
+  - ls
+  - npm test
