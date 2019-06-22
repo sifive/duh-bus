@@ -23,8 +23,7 @@ function walker (cb, root) {
 }
 
 function exporter (p) {
-  const arr = p.split(path.sep);
-  arr[arr.length - 1] = arr[arr.length - 1].split(/[.|_]/)[0];
+  const arr = p.split(path.sep).slice(0, -1);
   const res = '\nxassign([' + arr.map(e => `'${e}'`).join(', ') + '])(\n';
   return res;
 }
