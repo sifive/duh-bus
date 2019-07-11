@@ -80,7 +80,7 @@
         description: 'Protection type. This signal indicates the normal, privileged, or secure protection level of the transaction and whether the transaction is a data access or an instruction access.',
         wire: {
           onMaster: {
-            presence: 'required',
+            presence: 'optional',
             width: 3,
             direction: 'out',
           },
@@ -245,7 +245,7 @@
         description: 'Protection type. This signal provides protection unit information for the transaction',
         wire: {
           onMaster: {
-            presence: 'required',
+            presence: 'optional',
             width: 3,
             direction: 'out',
           },
