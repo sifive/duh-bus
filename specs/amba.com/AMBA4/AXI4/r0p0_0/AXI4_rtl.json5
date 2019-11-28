@@ -758,7 +758,7 @@
       maxBurst: {
         type: 'integer',
         title: 'Maximum burst length',
-        description: 'Maximum burst length supported by implementation',
+        description: 'Maximum burst length supported by implementation [unit: Transfers (Beats)]',
         minimum: 1,
         maximum: 256,
         default: 16
