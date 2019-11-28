@@ -754,6 +754,15 @@
       },
     },
     description: 'This defines the signals when implementing an AXI4 interface on RTL views.',
-    vendorExtensions: [],
+    props: {
+      maxBurst: {
+        type: 'integer',
+        title: 'Maximum burst length',
+        description: 'Maximum burst length supported by implementation',
+        minimum: 1,
+        maximum: 256,
+        default: 16
+      }
+    }
   },
 }
