@@ -1,0 +1,44 @@
+{
+  abstractionDefinition: {
+    vendor: 'sifive.com',
+    library: 'core',
+    name: 'SCIEUnpipelined_rtl',
+    version: '0.1.0',
+    busType: {
+      vendor: 'sifive.com',
+      library: 'core',
+      name: 'SCIEUnpipelined',
+      version: '0.1.0',
+    },
+    ports: {
+      insn: {
+        description: 'instruction word',
+        wire: {
+          onMaster: {width: 32, direction: 'out', presence: 'required'},
+          onSlave:  {width: 32, direction: 'in', presence: 'required'}
+        }
+      },
+      rs1: {
+        description: 'rs1 value',
+        wire: {
+          onMaster: {width: 'XLEN', direction: 'out', presence: 'required'},
+          onSlave:  {width: 'XLEN', direction: 'in', presence: 'required'}
+        }
+      },
+      rs2: {
+        description: 'rs1 value',
+        wire: {
+          onMaster: {width: 'XLEN', direction: 'out', presence: 'required'},
+          onSlave:  {width: 'XLEN', direction: 'in', presence: 'required'}
+        }
+      },
+      rd: {
+        description: 'rs1 value',
+        wire: {
+          onMaster: {width: 'XLEN', direction: 'in', presence: 'required'},
+          onSlave:  {width: 'XLEN', direction: 'out', presence: 'required'}
+        }
+      }
+    }
+  }
+}
