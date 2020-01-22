@@ -26,14 +26,14 @@
         }
       },
       rs2: {
-        description: 'rs1 value',
+        description: 'rs2 value',
         wire: {
           onMaster: {width: 'XLEN', direction: 'out', presence: 'required'},
           onSlave:  {width: 'XLEN', direction: 'in', presence: 'required'}
         }
       },
       rd: {
-        description: 'rs1 value',
+        description: 'rd value',
         wire: {
           onMaster: {width: 'XLEN', direction: 'in', presence: 'required'},
           onSlave:  {width: 'XLEN', direction: 'out', presence: 'required'}

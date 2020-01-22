@@ -21,15 +21,15 @@
       unpipelined: {
         description: 'unpipelined unit to be used',
         wire: {
-          onMaster: {width: 1, direction: 'out', presence: 'required'},
-          onSlave:  {width: 1, direction: 'in', presence: 'required'}
+          onMaster: {width: 1, direction: 'in', presence: 'required'},
+          onSlave:  {width: 1, direction: 'out', presence: 'required'}
         }
       },
       pipelined: {
         description: 'pipelined unit to be used',
         wire: {
-          onMaster: {width: 1, direction: 'out', presence: 'required'},
-          onSlave:  {width: 1, direction: 'in', presence: 'required'}
+          onMaster: {width: 1, direction: 'in', presence: 'required'},
+          onSlave:  {width: 1, direction: 'out', presence: 'required'}
         }
       }
     }
