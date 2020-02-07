@@ -1,13 +1,13 @@
 {
   abstractionDefinition: {
     vendor: 'sifive.com',
-    library: 'core',
-    name: 'SCIEUnpipelined_rtl',
+    library: 'SCIE',
+    name: 'unpipelined_rtl',
     version: '0.1.0',
     busType: {
       vendor: 'sifive.com',
-      library: 'core',
-      name: 'SCIEUnpipelined',
+      library: 'SCIE',
+      name: 'unpipelined',
       version: '0.1.0',
     },
     ports: {

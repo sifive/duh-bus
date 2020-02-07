@@ -1,13 +1,13 @@
 {
   abstractionDefinition: {
     vendor: 'sifive.com',
-    library: 'core',
-    name: 'SCIEDecoder_rtl',
+    library: 'SCIE',
+    name: 'decoder_rtl',
     version: '0.1.0',
     busType: {
       vendor: 'sifive.com',
-      library: 'core',
-      name: 'SCIEDecoder',
+      library: 'SCIE',
+      name: 'decoder',
       version: '0.1.0',
     },
     ports: {
