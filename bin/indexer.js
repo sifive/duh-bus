@@ -7,46 +7,50 @@ const json5 = require('json5');
 
 function walker (cb, root) {
   return function rec (dir) {
-    fs.readdir(dir).then(subdirs => {
-      Promise.all(subdirs.map(subdir => {
-        const res = path.resolve(dir, subdir);
-        fs.stat(res).then(e => {
-          if (e.isDirectory()) {
-            rec(res);
-          } else {
-            cb(path.relative(root, res), res);
-          }
-        });
-      }));
-    });
+    const subdirs = fs.readdirSync(dir);
+    Promise.all(subdirs.map(async subdir => {
+      const res = path.resolve(dir, subdir);
+      const e = fs.statSync(res);
+      if (e.isDirectory()) {
+        rec(res);
+      } else {
+        cb(path.relative(root, res), res);
+      }
+    }));
   };
 }
 
-function exporter (p) {
-  const arr = p.split(path.sep).slice(0, -1);
-  const res = '\nxassign([' + arr.map(e => `'${e}'`).join(', ') + '])(\n';
-  return res;
-}
+async function main () {
+  const index = {};
 
-function main () {
-  fs.writeFile('./index.js', `'use strict';
+  const xassign = (pat, name) => {
+    console.log(pat);
+    const obj = pat.reduce((res, cur) => res[cur] || (res[cur] = {}), index);
+    obj.abstractionDefinition = name.abstractionDefinition;
+  };
 
-const xassign = p => obj =>
-  Object.assign(p.reduce((res, cur) =>
-    res[cur] || (res[cur] = {}), exports), obj);
-`, 'utf8');
+  function exporter (p, body) {
+    const arr = p.split(path.sep).slice(0, -1);
+    xassign(arr, body);
+  }
 
+  fs.writeFileSync('./index.js', `'use strict';\n`, 'utf8');
   const root = path.resolve(process.cwd(), 'specs');
-  fs.pathExists(root).then(exists => {
-    if (exists) {
-      walker((short, full) => {
-        fs.readFile(full, 'utf8').then(body => {
-          json5.parse(body);
-          fs.appendFile('./index.js', exporter(short) + body + ');\n');
-        });
-      }, root)(root);
-    }
-  });
+  if (fs.pathExistsSync(root)) {
+
+    walker(async (short, full) => {
+      const body = fs.readFileSync(full, 'utf8');
+      const obj = json5.parse(body);
+      exporter(short, obj);
+    }, root)(root);
+
+    Object.keys(index).map(key => {
+      fs.appendFileSync('./index.js',
+        '\nexports[\'' + key + '\'] = ' + json5.stringify(index[key], null, 2) + ';\n'
+      );
+    });
+
+  }
 }
 
 main();
