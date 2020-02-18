@@ -11,7 +11,8 @@
     "prepublish": "node bin/indexer.js"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "specs/"
   ],
   "unpkg": "index.js",
   "repository": {
