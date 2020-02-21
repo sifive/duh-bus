@@ -1,0 +1,157 @@
+{
+  abstractionDefinition: {
+    vendor: 'sifive.com',
+    library: 'TL',
+    name: 'UL_rtl',
+    version: '1.0.0',
+    busType: {
+      vendor: 'sifive.com',
+      library: 'TL',
+      name: 'UL',
+      version: '1.0.0'
+    },
+    ports: {
+      clk: {
+        description: 'clock',
+        wire: {
+          isClock: true,
+          onMaster: {direction: 'in', width: 1},
+          onSlave:  {direction: 'in', width: 1}
+        }
+      },
+      /* Channel A
+        flows from master interface to slave interface, carrying request
+        messages sent to a particular address. This channel is used by all
+        TileLink conformance levels and is mandatory.
+      */
+      a_code: {
+        description: 'Operation code. Identifies the type of message carried by the channel.',
+        wire: {
+          onMaster: {direction: 'out', width: 3},
+          onSlave:  {direction: 'in',  width: 3}
+        }
+      },
+      a_size: {
+        description: 'Logarithm of the operation size: 2^n bytes.',
+        wire: {
+          onMaster: {direction: 'out', /* width: 'z' */},
+          onSlave:  {direction: 'in',  /* width: 'z' */}
+        }
+      },
+      a_source: {
+        description: 'Per-link master source identifier.',
+        wire: {
+          onMaster: {direction: 'out', /* width: 'o' */},
+          onSlave:  {direction: 'in',  /* width: 'o' */}
+        }
+      },
+      a_address: {
+        description: 'Target byte address of the operation. Must be aligned to a_size.',
+        wire: {
+          isAddress: true,
+          onMaster: {direction: 'out', /* width: 'a' */},
+          onSlave:  {direction: 'in',  /* width: 'a' */}
+        }
+      },
+      a_mask: {
+        description: 'Byte lane select for messages with data.',
+        wire: {
+          onMaster: {direction: 'out', /* width: 'w' */},
+          onSlave:  {direction: 'in',  /* width: 'w' */}
+        }
+      },
+      a_data: {
+        description: 'Data payload for messages with data.',
+        wire: {
+          isData: true,
+          onMaster: {direction: 'out', /* width: '8 * w' */},
+          onSlave:  {direction: 'in',  /* width: '8 * w' */}
+        }
+      },
+      a_corrupt: {
+        description: 'The data in this beat is corrupt.',
+        wire: {
+          onMaster: {direction: 'out', width: 1},
+          onSlave:  {direction: 'in',  width: 1}
+        }
+      },
+      a_valid: {
+        description: 'The sender is offering progress on an operation.',
+        wire: {
+          onMaster: {direction: 'out', width: 1, presence: 'required'},
+          onSlave:  {direction: 'in',  width: 1, presence: 'required'}
+        }
+      },
+      a_ready: {
+        description: 'The receiver accepted the offered progress.',
+        wire: {
+          onMaster: {direction: 'in',  width: 1},
+          onSlave:  {direction: 'out', width: 1}
+        }
+      },
+      /* Channel D
+        flows from slave interface to master interface. It carries response
+        messages for Channel A requests sent to a particular address. It also
+        carries acknowledgements for Channel C voluntary writebacks. This
+        channel is used by all TileLink conformance levels and is non-optional.
+      */
+      d_opcode: {
+        description: 'Operation code. Identifies the type of message carried by the channel.',
+        wire: {
+          onMaster: {direction: 'in',  width: 3},
+          onSlave:  {direction: 'out', width: 3}
+        }
+      },
+      d_size: {
+        description: 'Logarithm of the operation size: 2^n bytes.',
+        wire: {
+          onMaster: {direction: 'in',  /* width: 'z' */},
+          onSlave:  {direction: 'out', /* width: 'z' */}
+        }
+      },
+      d_source: {
+        description: 'Per-link master source identifier.',
+        wire: {
+          onMaster: {direction: 'in',  /* width: 'o' */},
+          onSlave:  {direction: 'out', /* width: 'o' */}
+        }
+      },
+      d_denied: {
+        description: 'The slave was unable to service the request.',
+        wire: {
+          onMaster: {direction: 'in',  width: 1},
+          onSlave:  {direction: 'out', width: 1}
+        }
+      },
+      d_data: {
+        description: 'Data payload for messages with data.',
+        wire: {
+          isData: true,
+          onMaster: {direction: 'in',  /* width: '8 * w' */},
+          onSlave:  {direction: 'out', /* width: '8 * w' */}
+        }
+      },
+      d_corrupt: {
+        description: 'Corruption was detected in the data payload.',
+        wire: {
+          onMaster: {direction: 'in',  width: 1},
+          onSlave:  {direction: 'out', width: 1}
+        }
+      },
+      d_valid: {
+        description: 'The sender is offering progress on an operation.',
+        wire: {
+          onMaster: {direction: 'in',  width: 1, presence: 'required'},
+          onSlave:  {direction: 'out', width: 1, presence: 'required'}
+        }
+      },
+      d_ready: {
+        description: 'The receiver accepted the offered progress.',
+        wire: {
+          onMaster: {direction: 'out', width: 1},
+          onSlave:  {direction: 'in',  width: 1}
+        }
+      }
+    }
+  }
+}
