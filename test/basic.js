@@ -11,7 +11,7 @@ const expect = chai.expect;
 describe('basic', () => {
   it('access', done => {
     expect(lib).to.be.a('object');
-    expect(Object.keys(lib).length).eq(3);
+    expect(Object.keys(lib).length).eq(4);
     done();
   });
   it('schema', done => {
