@@ -1,14 +1,14 @@
 {
   abstractionDefinition: {
-    vendor: 'opencores.org',
+    vendor: 'fossi-foundation.org',
     library: 'wishbone',
-    name: 'B4_rtl',
-    version: '1.0.0',
+    name: 'wishbone_rtl',
+    version: 'B.3',
     busType: {
-      vendor: 'opencores.org',
+      vendor: 'fossi-foundation.org',
       library: 'wishbone',
-      name: 'B4',
-      version: '1.0.0'
+      name: 'wishbone',
+      version: 'B.3'
     },
     ports: {
       // 2.2.2 Signals Common to MASTER and SLAVE Interfaces
