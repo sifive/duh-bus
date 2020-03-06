@@ -1,6 +1,6 @@
 {
   "name": "duh-bus",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Bus definition DUH documents",
   "main": "index.js",
   "bin": {
