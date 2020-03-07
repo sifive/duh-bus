@@ -1,12 +1,14 @@
 # Clocks
 
-Every bus interface will have one clock port associated with it.
+## Rules:
 
-All Ports mapped by the busInterface must be in this clock domain.
+* Every **port** must be mapped to at least one **busInterface**.
+* Every **busInterface** must have one clock port associated with it.
+* All **ports** mapped by the **busInterface** must be in the same single clock domain.
+* **Clock port** can be reused by multiple **busInterfaces**.
+* Non-standard busInterfaces must have clock too.
+* **busInterface** with `clock == null` may contain only inputs with internal clock re-synchronizers.
 
-Clock port can be reused by multiple busInterfaces.
-
-Non-standard busInterfaces must have clock too.
 
 ```js
 {
@@ -27,5 +29,3 @@ Non-standard busInterfaces must have clock too.
   }
 }  
 ```
-
-busInterface with clock = null may contain only inputs with internal clock re-synchronizers.
