@@ -16,22 +16,22 @@
         requiresDriver: true,
         isClock: true,
         wire: {
-          onMaster: {width: 1, direction: 'in', presence: 'optional'},
-          onSlave:  {width: 1, direction: 'in', presence: 'optional'}
+          onMaster: {width: 1, direction: 'in'},
+          onSlave:  {width: 1, direction: 'in'}
         }
       },
       RDEN: {
         description: 'Read enable',
         wire: {
-          onMaster: {width: 1, direction: 'out', presence: 'required'},
-          onSlave:  {width: 1, direction: 'in', presence: 'required'}
+          onMaster: {width: 1, direction: 'out'},
+          onSlave:  {width: 1, direction: 'in'}
         }
       },
       BEN: {
         description: 'Byte enable',
         wire: {
-          onMaster: {width: 'BEN_WIDTH', direction: 'out', presence: 'optional'},
-          onSlave:  {width: 'BEN_WIDTH', direction: 'in', presence: 'optional'}
+          onMaster: {width: 'BEN_WIDTH', direction: 'out'},
+          onSlave:  {width: 'BEN_WIDTH', direction: 'in'}
         }
       },
       ADDR: {
@@ -51,8 +51,8 @@
       RDERR: {
         description: 'If ECC feature is present, this signals that an undorrectable error was detected on the read data',
         wire: {
-          onMaster: {direction: 'in', presence: 'optional'},
-          onSlave:  {direction: 'out', presence: 'optional'}
+          onMaster: {direction: 'in'},
+          onSlave:  {direction: 'out'}
         }
       }
     }
