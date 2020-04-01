@@ -762,7 +762,34 @@
         minimum: 1,
         maximum: 256,
         default: 16
-      }
-    }
+      },
+      writeInterleavingDepth: {
+        type: 'integer', minimum: 0,
+        title: 'Write Interleaving Depth',
+        description: 'Master can not issue more write transactions than slave can accept.'
+      },
+      readReorderingDepth: {
+        type: 'integer', minimum: 0,
+        title: 'Maximum Reordered Reads',
+        description: 'Slave can not reorder more read transactions than master can accept.'
+      },
+      writeReorderingDepth: {
+        type: 'integer', minimum: 0,
+        title: 'Maximum Reordered BResps',
+        description: 'Slave can not reorder more write transactions than master can accept'
+      },
+      outstandingReads: {
+        type: 'integer', minimum: 0,
+        title: 'Maximum number of outstanding read transactions',
+      },
+      outstandingWrites: {
+        type: 'integer', minimum: 0,
+        title: 'Maximum number of outstanding write transactions'
+      },
+      outstandingTransactions: {
+        type: 'integer', minimum: 0,
+        title: 'Maximum number of outstanding transactions'
+      },
+    },
   },
 }
