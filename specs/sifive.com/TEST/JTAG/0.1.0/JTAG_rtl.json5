@@ -47,8 +47,8 @@
         description: 'Reset',
         isReset: true,
         wire: {
-          onMaster: {width: 1, direction: 'out', presence: 'optional'},
-          onSlave:  {width: 1, direction: 'in', presence: 'optional'}
+          onMaster: {width: 1, direction: 'out'},
+          onSlave:  {width: 1, direction: 'in'}
         }
       },
     }
