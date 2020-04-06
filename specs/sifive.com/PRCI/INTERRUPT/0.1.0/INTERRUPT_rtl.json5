@@ -2,17 +2,17 @@
   abstractionDefinition: {
     vendor: 'sifive.com',
     library: 'PRCI',
-    name: 'IRQ_rtl',
+    name: 'INTERRUPT_rtl',
     version: '0.1.0',
     busType: {
       vendor: 'sifive.com',
       library: 'PRCI',
-      name: 'IRQ',
+      name: 'INTERRUPT',
       version: '0.1.0',
     },
     ports: {
-      REQ: {
-        description: 'Interrupt request bundle',
+      IRQ: {
+        description: 'Interrupt request signals',
         wire: {
           onMaster: {direction: 'in', presence: 'required'},
           onSlave:  {direction: 'out', presence: 'required'}
