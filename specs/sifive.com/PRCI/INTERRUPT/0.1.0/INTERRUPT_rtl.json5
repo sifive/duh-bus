@@ -14,8 +14,8 @@
       IRQ: {
         description: 'Interrupt request signals',
         wire: {
-          onMaster: {direction: 'in', presence: 'required'},
-          onSlave:  {direction: 'out', presence: 'required'}
+          onMaster: {direction: 'out', presence: 'required'},
+          onSlave:  {direction: 'in', presence: 'required'}
         }
       }
     }
