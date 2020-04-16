@@ -54,6 +54,27 @@
           onSlave:  {width: 1, direction: 'in'}
         }
       },
+      SE: {
+        description: 'scan chain enable',
+        wire: {
+          onMaster: {width: 1, direction: 'out'},
+          onSlave:  {width: 1, direction: 'in'}
+        }
+      },
+      SI: {
+        description: 'scan chain input',
+        wire: {
+          onMaster: {width: 1, direction: 'out'},
+          onSlave:  {width: 1, direction: 'in'}
+        }
+      },
+      SO: {
+        description: 'scan chain output',
+        wire: {
+          onMaster: {width: 1, direction: 'in'},
+          onSlave:  {width: 1, direction: 'out'}
+        }
+      },
     }
   }
 }
