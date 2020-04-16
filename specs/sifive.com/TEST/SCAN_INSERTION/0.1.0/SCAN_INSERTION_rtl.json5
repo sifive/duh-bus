@@ -41,38 +41,31 @@
         }
       },
       TEST_MODE: {
-        description: 'switch into test mode (active high)',
+        description: 'switch into test mode',
         wire: {
-          onMaster: {width: 1, direction: 'out'},
-          onSlave:  {width: 1, direction: 'in'}
-        }
-      },
-      TEST_MODEn: {
-        description: 'switch into test mode (active low)',
-        wire: {
-          onMaster: {width: 1, direction: 'out'},
-          onSlave:  {width: 1, direction: 'in'}
+          onMaster: {direction: 'out'},
+          onSlave:  {direction: 'in'}
         }
       },
       SE: {
         description: 'scan chain enable',
         wire: {
-          onMaster: {width: 1, direction: 'out'},
-          onSlave:  {width: 1, direction: 'in'}
+          onMaster: {direction: 'out'},
+          onSlave:  {direction: 'in'}
         }
       },
       SI: {
         description: 'scan chain input',
         wire: {
-          onMaster: {width: 1, direction: 'out'},
-          onSlave:  {width: 1, direction: 'in'}
+          onMaster: {direction: 'out'},
+          onSlave:  {direction: 'in'}
         }
       },
       SO: {
         description: 'scan chain output',
         wire: {
-          onMaster: {width: 1, direction: 'in'},
-          onSlave:  {width: 1, direction: 'out'}
+          onMaster: {direction: 'in'},
+          onSlave:  {direction: 'out'}
         }
       },
     }
