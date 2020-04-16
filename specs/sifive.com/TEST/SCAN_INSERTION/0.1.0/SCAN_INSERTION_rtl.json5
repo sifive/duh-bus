@@ -21,7 +21,6 @@
       },
       CLOCK_EN: {
         description: 'Clock enable on the scan clock path',
-        isClock: true,
         wire: {
           onMaster: {width: 1, direction: 'out'},
           onSlave:  {width: 1, direction: 'in'}
