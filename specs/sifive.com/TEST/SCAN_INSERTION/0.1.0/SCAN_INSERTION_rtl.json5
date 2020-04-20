@@ -33,13 +33,6 @@
           onSlave:  {width: 1, direction: 'in'}
         }
       },
-      RESETn: {
-        description: 'Reset used during scan (active low)',
-        wire: {
-          onMaster: {width: 1, direction: 'out'},
-          onSlave:  {width: 1, direction: 'in'}
-        }
-      },
       TEST_MODE: {
         description: 'switch into test mode',
         wire: {
