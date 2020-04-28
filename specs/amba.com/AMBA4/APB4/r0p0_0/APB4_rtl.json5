@@ -79,12 +79,12 @@
         description: 'Enable - This signal indicates the second and subsequent cycles of an APB transfer.',
         wire: {
           onMaster: {
-            presence: 'required',
+            // presence: 'required',
             width: 1,
             direction: 'out',
           },
           onSlave: {
-            presence: 'required',
+            // presence: 'required',
             width: 1,
             direction: 'in',
           },
