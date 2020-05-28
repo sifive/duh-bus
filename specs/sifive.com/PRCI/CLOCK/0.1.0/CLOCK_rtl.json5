@@ -1,0 +1,29 @@
+{
+  abstractionDefinition: {
+    vendor: 'sifive.com',
+    library: 'PRCI',
+    name: 'CLOCK_rtl',
+    version: '0.1.0',
+    busType: {
+      vendor: 'sifive.com',
+      library: 'PRCI',
+      name: 'CLOCK',
+      version: '0.1.0',
+    },
+    ports: {
+      CLOCK: {
+        description: 'clock signals',
+        wire: {
+          isClock: true,
+          onMaster: {direction: 'out', presence: 'required'},
+          onSlave:  {direction: 'in', presence: 'required'}
+        }
+      }
+    },
+    props: {
+      frequency: {
+        type: 'integer'
+      }
+    }
+  }
+}
