@@ -22,8 +22,45 @@
     },
     props: {
       frequency: {
-        type: 'integer'
+        description: 'clock frequency in [Hz]',
+        oneOf: [{
+          type: 'number',
+          description: 'specific frequency'
+        }, {
+          type: 'object',
+          properties: {
+            minimum: {
+              type: 'number',
+              description: 'minimum clock frequency'
+            },
+            maximum: {
+              type: 'number',
+              description: 'maximum clock frequency'
+            }
+          }
+        }, {
+          type: 'array',
+          items: {
+            type: 'number',
+            description: 'set of allowed frequencies'
+          }
+        }]
       }
     }
   }
 }
+
+/* minimum: 1, */
+/* description: 'clock frequency in [Hz]' */
+/* }, { */
+/* type: 'object', */
+/* properties: {
+  minimum: {
+    type: 'number',
+    description: 'minimum clock frequency in [Hz]'
+  },
+  maximum: {
+    type: 'number',
+    description: 'maximum clock frequency in [Hz]'
+  }
+} */
