@@ -147,7 +147,7 @@
             presence: 'required',
             direction: 'in',
           },
-          defaultValue: '0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF',
+          defaultValue: 0xFFFFFFFF,
         },
       },
       WVALID: {
