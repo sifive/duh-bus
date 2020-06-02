@@ -2,17 +2,26 @@
   abstractionDefinition: {
     vendor: 'sifive.com',
     library: 'MEM',
-    name: 'SPRAM_rtl',
+    name: 'DPRAM_rtl',
     version: '0.1.0',
     busType: {
       vendor: 'sifive.com',
       library: 'MEM',
-      name: 'SPRAM',
+      name: 'DPRAM',
       version: '0.1.0',
     },
     ports: {
-      CLK: {
-        description: 'Memory clock',
+      WRCLK: {
+        description: 'Write clock',
+        requiresDriver: true,
+        isClock: true,
+        wire: {
+          onMaster: {width: 1, direction: 'in', presence: 'optional'},
+          onSlave:  {width: 1, direction: 'in', presence: 'optional'}
+        }
+      },
+      RDCLK: {
+        description: 'Read clock',
         requiresDriver: true,
         isClock: true,
         wire: {
@@ -41,8 +50,8 @@
           onSlave:  {width: 'BEN_WIDTH', direction: 'in', presence: 'optional'}
         }
       },
-      ADDR: {
-        description: 'Read / Write port address',
+      WRADDR: {
+        description: 'Write port address',
         wire: {
           onMaster: {width: 'ADDR_WIDTH', direction: 'out', presence: 'required'},
           onSlave:  {width: 'ADDR_WIDTH', direction: 'in', presence: 'required'}
@@ -53,6 +62,13 @@
         wire: {
           onMaster: {width: 'DATA_WIDTH', direction: 'out', presence: 'required'},
           onSlave:  {width: 'DATA_WIDTH', direction: 'in', presence: 'required'}
+        }
+      },
+      RDADDR: {
+        description: 'Read port address',
+        wire: {
+          onMaster: {width: 'ADDR_WIDTH', direction: 'out', presence: 'required'},
+          onSlave:  {width: 'ADDR_WIDTH', direction: 'in', presence: 'required'}
         }
       },
       RDDATA: {
