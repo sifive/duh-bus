@@ -13,9 +13,9 @@
     ports: {
       CLK: {
         description: 'Memory clock',
-        requiresDriver: true,
-        isClock: true,
         wire: {
+          isClock: true,
+          requiresDriver: true,
           onMaster: {width: 1, direction: 'in'},
           onSlave:  {width: 1, direction: 'in'}
         }
