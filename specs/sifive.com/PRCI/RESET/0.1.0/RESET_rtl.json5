@@ -1,0 +1,42 @@
+{
+  abstractionDefinition: {
+    vendor: 'sifive.com',
+    library: 'PRCI',
+    name: 'RESET_rtl',
+    version: '0.1.0',
+    busType: {
+      vendor: 'sifive.com',
+      library: 'PRCI',
+      name: 'RESET',
+      version: '0.1.0',
+    },
+    ports: {
+      RESET: {
+        description: 'reset signals',
+        wire: {
+          isReset: true,
+          onMaster: {direction: 'out', presence: 'required'},
+          onSlave:  {direction: 'in', presence: 'required'}
+        }
+      }
+    },
+    props: {
+      ResetPolarity: {
+          type: "string",
+	  enum: ["ActiveHigh", "ActiveLow"],
+      },
+      ResetType: {
+	  type: "string",
+	  enum: ["Synchronous", "Asynchronous", "Full Asynchronous"]
+      },
+      ClocksBeforeDeassertion: {
+	  type: "integer",
+	  description: "Number of clock edges that must be provided before this reset signal is deasserted in order to properly initialize and clear contention within the IP"
+      },
+      ClocksAfterDeassertion: {
+	  type: "integer",
+	  description: "Number of clock edges that must be provided after this reset signal is deasserted before the IP is available for use"
+      }
+    }
+  }
+}
