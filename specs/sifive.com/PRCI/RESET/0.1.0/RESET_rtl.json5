@@ -21,22 +21,24 @@
       }
     },
     props: {
-      ResetPolarity: {
-          type: "string",
-	  enum: ["ActiveHigh", "ActiveLow"],
+      polarity: {
+          type: 'string',
+	  enum: ['ActiveHigh', 'ActiveLow'],
+	  default: 'ActiveLow'
       },
-      ResetType: {
-	  type: "string",
-	  enum: ["Synchronous", "Asynchronous", "Full Asynchronous"]
+      type: {
+	  type: 'string',
+	  enum: ['Synchronous', 'Asynchronous', 'Full Asynchronous']
       },
-      ClocksBeforeDeassertion: {
-	  type: "integer",
-	  description: "Number of clock edges that must be provided before this reset signal is deasserted in order to properly initialize and clear contention within the IP"
+      clocksBeforeDeassertion: {
+	  type: 'integer',
+	  description: 'Number of clock edges that must be provided before this reset signal is deasserted in order to properly initialize and clear contention within the IP'
       },
-      ClocksAfterDeassertion: {
-	  type: "integer",
-	  description: "Number of clock edges that must be provided after this reset signal is deasserted before the IP is available for use"
+      clocksAfterDeassertion: {
+	  type: 'integer',
+	  description: 'Number of clock edges that must be provided after this reset signal is deasserted before the IP is available for use'
       }
     }
   }
 }
+
