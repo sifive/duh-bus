@@ -22,7 +22,8 @@
     },
     props: {
       frequency: {
-        type: 'integer'
+        type: 'number',
+        minimum: 0
       }
     }
   }
