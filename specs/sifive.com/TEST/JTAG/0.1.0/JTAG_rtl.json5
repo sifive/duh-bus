@@ -16,39 +16,39 @@
         requiresDriver: true,
         isClock: true,
         wire: {
-          onMaster: {width: 1, direction: 'out', presence: 'required'},
-          onSlave:  {width: 1, direction: 'in', presence: 'required'}
+          onInitiator: {width: 1, direction: 'out', presence: 'required'},
+          onTarget:  {width: 1, direction: 'in', presence: 'required'}
         }
       },
       TMS: {
         description: 'Mode Select',
         wire: {
-          onMaster: {width: 1, direction: 'out', presence: 'required'},
-          onSlave:  {width: 1, direction: 'in', presence: 'required'}
+          onInitiator: {width: 1, direction: 'out', presence: 'required'},
+          onTarget:  {width: 1, direction: 'in', presence: 'required'}
         }
       },
       TDI: {
         description: 'Data Input',
         isData: true,
         wire: {
-          onMaster: {width: 1, direction: 'out', presence: 'required'},
-          onSlave:  {width: 1, direction: 'in', presence: 'required'}
+          onInitiator: {width: 1, direction: 'out', presence: 'required'},
+          onTarget:  {width: 1, direction: 'in', presence: 'required'}
         }
       },
       TDO: {
         description: 'Data Output',
         isData: true,
         wire: {
-          onMaster: {width: 1, direction: 'in', presence: 'required'},
-          onSlave:  {width: 1, direction: 'out', presence: 'required'}
+          onInitiator: {width: 1, direction: 'in', presence: 'required'},
+          onTarget:  {width: 1, direction: 'out', presence: 'required'}
         }
       },
       TRST: {
         description: 'Reset',
         isReset: true,
         wire: {
-          onMaster: {width: 1, direction: 'out'},
-          onSlave:  {width: 1, direction: 'in'}
+          onInitiator: {width: 1, direction: 'out'},
+          onTarget:  {width: 1, direction: 'in'}
         }
       },
     }

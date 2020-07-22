@@ -14,29 +14,29 @@
       insn: {
         description: 'instruction word',
         wire: {
-          onMaster: {width: 32, direction: 'out', presence: 'required'},
-          onSlave:  {width: 32, direction: 'in', presence: 'required'}
+          onInitiator: {width: 32, direction: 'out', presence: 'required'},
+          onTarget:  {width: 32, direction: 'in', presence: 'required'}
         }
       },
       rs1: {
         description: 'rs1 value',
         wire: {
-          onMaster: {width: 32, direction: 'out', presence: 'required'},
-          onSlave:  {width: 32, direction: 'in', presence: 'required'}
+          onInitiator: {width: 32, direction: 'out', presence: 'required'},
+          onTarget:  {width: 32, direction: 'in', presence: 'required'}
         }
       },
       rs2: {
         description: 'rs2 value',
         wire: {
-          onMaster: {width: 32, direction: 'out', presence: 'required'},
-          onSlave:  {width: 32, direction: 'in', presence: 'required'}
+          onInitiator: {width: 32, direction: 'out', presence: 'required'},
+          onTarget:  {width: 32, direction: 'in', presence: 'required'}
         }
       },
       rd: {
         description: 'rd value',
         wire: {
-          onMaster: {width: 32, direction: 'in', presence: 'required'},
-          onSlave:  {width: 32, direction: 'out', presence: 'required'}
+          onInitiator: {width: 32, direction: 'in', presence: 'required'},
+          onTarget:  {width: 32, direction: 'out', presence: 'required'}
         }
       }
     }

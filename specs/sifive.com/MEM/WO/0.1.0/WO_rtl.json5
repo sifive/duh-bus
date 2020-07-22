@@ -16,43 +16,43 @@
         wire: {
           isClock: true,
           requiresDriver: true,
-          onMaster: {width: 1, direction: 'in', presence: 'optional'},
-          onSlave:  {width: 1, direction: 'in', presence: 'optional'}
+          onInitiator: {width: 1, direction: 'in', presence: 'optional'},
+          onTarget:  {width: 1, direction: 'in', presence: 'optional'}
         }
       },
       WREN: {
         description: 'Write enable',
         wire: {
-          onMaster: {width: 1, direction: 'out', presence: 'required'},
-          onSlave:  {width: 1, direction: 'in', presence: 'required'}
+          onInitiator: {width: 1, direction: 'out', presence: 'required'},
+          onTarget:  {width: 1, direction: 'in', presence: 'required'}
         }
       },
       BEN: {
         description: 'Byte enable',
         wire: {
-          onMaster: {width: 'BEN_WIDTH', direction: 'out', presence: 'optional'},
-          onSlave:  {width: 'BEN_WIDTH', direction: 'in', presence: 'optional'}
+          onInitiator: {width: 'BEN_WIDTH', direction: 'out', presence: 'optional'},
+          onTarget:  {width: 'BEN_WIDTH', direction: 'in', presence: 'optional'}
         }
       },
       ADDR: {
         description: 'Read / Write port address',
         wire: {
-          onMaster: {width: 'ADDR_WIDTH', direction: 'out', presence: 'required'},
-          onSlave:  {width: 'ADDR_WIDTH', direction: 'in', presence: 'required'}
+          onInitiator: {width: 'ADDR_WIDTH', direction: 'out', presence: 'required'},
+          onTarget:  {width: 'ADDR_WIDTH', direction: 'in', presence: 'required'}
         }
       },
       WRDATA: {
         description: 'Write port data',
         wire: {
-          onMaster: {width: 'DATA_WIDTH', direction: 'out', presence: 'required'},
-          onSlave:  {width: 'DATA_WIDTH', direction: 'in', presence: 'required'}
+          onInitiator: {width: 'DATA_WIDTH', direction: 'out', presence: 'required'},
+          onTarget:  {width: 'DATA_WIDTH', direction: 'in', presence: 'required'}
         }
       },
       RDERR: {
         description: 'If ECC feature is present, this signals that an undorrectable error was detected on the read data',
         wire: {
-          onMaster: {direction: 'in', presence: 'optional'},
-          onSlave:  {direction: 'out', presence: 'optional'}
+          onInitiator: {direction: 'in', presence: 'optional'},
+          onTarget:  {direction: 'out', presence: 'optional'}
         }
       }
     }
