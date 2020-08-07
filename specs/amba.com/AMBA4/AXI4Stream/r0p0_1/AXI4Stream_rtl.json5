@@ -15,12 +15,12 @@
         description: 'Global clock signal. All signals are sampled on the rising edge of the global clock',
         wire: {
           isClock: true,
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'in',
@@ -31,12 +31,12 @@
       ACLKEN: {
         description: 'Clock enable signal. Used as a qualifier for the ACLK signal',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'in',
@@ -49,12 +49,12 @@
         description: 'Global reset signal. This signal is active LOW',
         wire: {
           isReset: true,
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'in',
@@ -65,12 +65,12 @@
       TVALID: {
         description: 'This signal indicates that the master is driving a valid transfer. A transfer takes place when both TVALID and TREADY are asserted.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             width: 1,
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             width: 1,
             direction: 'in',
@@ -80,12 +80,12 @@
       TREADY: {
         description: 'This signal indicates that the slave can accept  a transfer in the current cycle.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'out',
@@ -97,11 +97,11 @@
         description: 'This bus is the primary payload that is used to provide the data that is passing across the interface. The width of the data payload is an integer number of bytes.',
         wire: {
           isData: true,
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             direction: 'in',
           },
@@ -111,11 +111,11 @@
       TSTRB: {
         description: 'TSTRB is the byte qualifier that indicates whether the content of the associated byte of TDATA is processed as a data byte of position byte. \n            When TSTRB is absent and TKEEP is present, TSTRB defaults to TKEEP.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             direction: 'in',
           },
@@ -125,11 +125,11 @@
       TKEEP: {
         description: 'TKEEP is the byte qualifier that indicates whether the content of the associated byte of TDATA is processed as a data stream. Associated bytes that have the TKEEP byte qualifier deasserted are null bytes and can be removed from the data stream. ',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             direction: 'in',
           },
@@ -139,12 +139,12 @@
       TLAST: {
         description: 'This signal indicates the boundary of a packet.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 1,
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'in',
@@ -155,11 +155,11 @@
       TID: {
         description: 'This is used as data stream identifier that indicates different streams of data.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             direction: 'in',
           },
@@ -169,11 +169,11 @@
       TDEST: {
         description: 'This signal provides routing information for the data stream.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             direction: 'in',
           },
@@ -184,11 +184,11 @@
         description: 'TUSER is user defined sideband information that can be transmitted alongside the data stream.',
         isUser: true,
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             direction: 'in',
           },

@@ -15,12 +15,12 @@
         description: 'Clock - The rising edge of PCLK times all transfers on the APB',
         wire: {
           isClock: true,
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'in',
@@ -32,12 +32,12 @@
         description: 'Reset - The APB reset signal is active LOW. This signal is normally connected directly to the system bus reset signal.',
         wire: {
           isReset: true,
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'in',
@@ -49,11 +49,11 @@
         description: 'Address - This is the APB address bus. It can be up to 32 bits wide and is driven by the peripheral bus bridge unit.',
         wire: {
           isAddress: true,
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             direction: 'in',
           },
@@ -63,12 +63,12 @@
       PSEL: {
         description: 'Select - The APB bridge unit generates this signal to each peripheral bus slave. It indicates that the slave device is selected and that a data transfer is required.There is a PSEL signal for each slave.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             width: 1,
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             width: 1,
             direction: 'in',
@@ -78,12 +78,12 @@
       PENABLE: {
         description: 'Enable - This signal indicates the second and subsequent cycles of an APB transfer.',
         wire: {
-          onMaster: {
+          onInitiator: {
             // presence: 'required',
             width: 1,
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             // presence: 'required',
             width: 1,
             direction: 'in',
@@ -93,12 +93,12 @@
       PWRITE: {
         description: 'Direction - This signal indicates an APB write access when HIGH and an APB read access when LOW.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             width: 1,
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             width: 1,
             direction: 'in',
@@ -109,11 +109,11 @@
         description: 'Read Data - The selected slave drives this bus during read cycles when PWRITE is LOW. This bus can be up to 32-bits wide.',
         wire: {
           isData: true,
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             direction: 'out',
           },
@@ -124,11 +124,11 @@
         description: 'Write data - This bus is driven by the peripheral bus bridge unit during write cycles when PWRITE is HIGH. This bus can be up to 32 bits wide.',
         wire: {
           isData: true,
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             direction: 'in',
           },
@@ -139,12 +139,12 @@
         description: 'Protection type - This signal indicates the normal, privileged, or secure protection level of the transaction and whether the transaction is a data access or an instruction access.',
         wire: {
           isData: true,
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 3,
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 3,
             direction: 'in',
@@ -156,11 +156,11 @@
         description: 'Write strobes - This signal indicates which byte lanes to update during a write transfer. There is one write strobe for each eight bits of the write data bus.\nTherefore, PSTRB[n] corresponds to PWDATA[(8n + 7):(8n)]. Write strobes must not be active during a read transfer.',
         wire: {
           isData: true,
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             direction: 'in',
           },
@@ -170,12 +170,12 @@
       PREADY: {
         description: 'Ready - The slave uses this signal to extend an APB transfer',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'out',
@@ -186,12 +186,12 @@
       PSLVERR: {
         description: 'This signal indicates a transfer failure. APB peripherals are not required to support the PSLVERR pin. This is true for both existing and new APB peripheral designs. Where a peripheral does not include this pin then the appropriate input to the APB bridge is tied LOW.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'out',
@@ -202,12 +202,12 @@
       PCLKEN: {
         description: 'This is an optional enable signal for PCLK domain',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'in',

@@ -15,8 +15,8 @@
         description: 'The clock input [CLK] coordinates all activities for the internal logic within the WISHBONE interconnect. All WISHBONE output signals are registered at the rising edge of [CLK]. All WISHBONE input signals are stable before the rising edge of [CLK].',
         wire: {
           isClock: true,
-          onMaster: { presence: 'optional', width: 1, direction: 'in' }, // CLK_I
-          onSlave:  { presence: 'optional', width: 1, direction: 'in' }, // CLK_I
+          onInitiator: { presence: 'optional', width: 1, direction: 'in' }, // CLK_I
+          onTarget:  { presence: 'optional', width: 1, direction: 'in' }, // CLK_I
           requiresDriver: true
         }
       },
@@ -24,8 +24,8 @@
         description: 'The reset input [RST] forces the WISHBONE interface to restart. Furthermore, all internal self-starting state machines will be forced into an initial state. This signal only resets the WISHBONE interface. It is not required to reset other parts of an IP core (although it may be used that way).',
         wire: {
           isReset: true,
-          onMaster: { presence: 'optional', width: 1, direction: 'in' }, // RST_I
-          onSlave:  { presence: 'optional', width: 1, direction: 'in' }, // RST_I
+          onInitiator: { presence: 'optional', width: 1, direction: 'in' }, // RST_I
+          onTarget:  { presence: 'optional', width: 1, direction: 'in' }, // RST_I
           requiresDriver: true
         }
       },
@@ -34,24 +34,24 @@
         description: 'The address array [ADR()] is used to pass a binary address. The higher array boundary is specific to the address width of the core, and the lower array boundary is determined by the data port size. For example the array size on a 32-bit data port with BYTE granularity is [ADR(n..2)]. In some cases (such as FIFO interfaces) the array may not be present on the interface.',
         wire: {
           isAddress: true,
-          onMaster: { presence: 'required', direction: 'out' }, // ADR_O
-          onSlave:  { presence: 'required', direction: 'in'  }, // ADR_I
+          onInitiator: { presence: 'required', direction: 'out' }, // ADR_O
+          onTarget:  { presence: 'required', direction: 'in'  }, // ADR_I
         }
       },
       DAT_WRITE: {
         description: 'The data write array [DAT_WRITE] is used to pass binary data. The array boundaries are determined by the port size, with a maximum port size of 64-bits (e.g. [DAT_WRITE(63..0)]). Also see the [DAT_READ()] and [SEL()] signal descriptions.',
         wire: {
           isData: true,
-          onMaster: { presence: 'required', direction: 'out' }, // DAT_O
-          onSlave:  { presence: 'required', direction: 'in'  }, // DAT_I
+          onInitiator: { presence: 'required', direction: 'out' }, // DAT_O
+          onTarget:  { presence: 'required', direction: 'in'  }, // DAT_I
         }
       },
       DAT_READ: {
         description: 'The data read array [DAT_READ()] is used to pass binary data. The array boundaries are determined by the port size, with a maximum port size of 64-bits (e.g. [DAT_READ(63..0)]). Also see the [DAT_WRITE()] and [SEL()] signal descriptions.',
         wire: {
           isData: true,
-          onMaster: { presence: 'required', direction: 'in'  }, // DAT_I
-          onSlave:  { presence: 'required', direction: 'out' }, // DAT_O
+          onInitiator: { presence: 'required', direction: 'in'  }, // DAT_I
+          onTarget:  { presence: 'required', direction: 'out' }, // DAT_O
         }
       },
 
@@ -59,36 +59,36 @@
       WE: {
         description: 'The write enable [WE] indicates whether the current local bus cycle is a READ or WRITE cycle. The signal is negated during READ cycles, and is asserted during WRITE cycles.',
         wire: {
-          onMaster: { presence: 'required', width: 1, direction: 'out' }, // WE_O
-          onSlave:  { presence: 'required', width: 1, direction: 'in'  }, // WE_I
+          onInitiator: { presence: 'required', width: 1, direction: 'out' }, // WE_O
+          onTarget:  { presence: 'required', width: 1, direction: 'in'  }, // WE_I
         }
       },
       SEL: {
         description: 'The select array [SEL()] indicates where valid data is expected on the [DAT_READ()] signal array during READ cycles, and where it is placed on the [DAT_WRITE()] signal array during WRITE cycles. The array boundaries are determined by the granularity of a port. For example, if 8-bit granularity is used on a 64-bit port, then there would be an array of eight select signals with boundaries of [SEL(7..0)]. Each individual select signal correlates to one of eight active bytes on the 64-bit data port. For more information about [SEL()], please refer to the data organization section in Chapter 3 of this specification. Also see the [DAT_WRITE()], [DAT_READ()] and [STB] signal descriptions.',
         wire: {
-          onMaster: { presence: 'required', width: 1, direction: 'out' }, // SEL_O
-          onSlave:  { presence: 'required', width: 1, direction: 'in'  }, // SEL_I
+          onInitiator: { presence: 'required', width: 1, direction: 'out' }, // SEL_O
+          onTarget:  { presence: 'required', width: 1, direction: 'in'  }, // SEL_I
         }
       },
       CYC: {
         description: 'The cycle [CYC], when asserted, indicates that a valid bus cycle is in progress. The signal is asserted for the duration of all bus cycles. For example, during a BLOCK transfer cycle there can be multiple data transfers. The [CYC_O] signal is asserted during the first data transfer, and remains asserted until the last data transfer. The [CYC] signal is useful for interfaces with multi-port interfaces (such as dual port memories). In these cases, the [CYC] signal requests use of a common bus from an arbiter.',
         wire: {
-          onMaster: { presence: 'required', width: 1, direction: 'out' }, // CYC_O
-          onSlave:  { presence: 'required', width: 1, direction: 'in'  }, // CYC_I
+          onInitiator: { presence: 'required', width: 1, direction: 'out' }, // CYC_O
+          onTarget:  { presence: 'required', width: 1, direction: 'in'  }, // CYC_I
         }
       },
       STB: {
         description: 'The strobe [STB] indicates a valid data transfer cycle. It is used to qualify various other signals on the interface such as [SEL()]. The SLAVE asserts either the [ACK], [ERR] or [RTY] signals in response to every assertion of the [STB] signal.',
         wire: {
-          onMaster: { presence: 'required', width: 1, direction: 'out' }, // STB_O
-          onSlave:  { presence: 'required', width: 1, direction: 'in'  }, // STB_I
+          onInitiator: { presence: 'required', width: 1, direction: 'out' }, // STB_O
+          onTarget:  { presence: 'required', width: 1, direction: 'in'  }, // STB_I
         }
       },
       ACK: {
         description: 'The acknowledge [ACK], when asserted, indicates the normal termination of a bus cycle. Also see the [ERR] and [RTY] signal descriptions.',
         wire: {
-          onMaster: { presence: 'required', width: 1, direction: 'in'  }, // ACK_I
-          onSlave:  { presence: 'required', width: 1, direction: 'out' }, // ACK_O
+          onInitiator: { presence: 'required', width: 1, direction: 'in'  }, // ACK_I
+          onTarget:  { presence: 'required', width: 1, direction: 'out' }, // ACK_O
         }
       },
 
@@ -96,29 +96,29 @@
       TGD_WRITE: {
         description: 'Data tag type [TGD_WRITE()] is used on MASTER and SLAVE interfaces. It contains information that is associated with the data input array [DAT_WRITE()], and is qualified by signal [STB_I]. For example, parity protection, error correction and time stamp information can be attached to the data bus. These tag bits simplify the task of defining new signals because their timing (in relation to every bus cycle) is pre-defined by this specification. The name and operation of a data tag must be defined in the WISHBONE DATASHEET.',
         wire: {
-          onMaster: { presence: 'required', direction: 'out' }, // TGD_O
-          onSlave:  { presence: 'required', direction: 'in'  }, // TGD_I
+          onInitiator: { presence: 'required', direction: 'out' }, // TGD_O
+          onTarget:  { presence: 'required', direction: 'in'  }, // TGD_I
         }
       },
       TGD_READ: {
         description: 'Data tag type [TGD_O()] is used on MASTER and SLAVE interfaces. It contains information that is associated with the data output array [DAT_O()], and is qualified by signal [STB_O]. For example, parity protection, error correction and time stamp information can be attached to the data bus. These tag bits simplify the task of defining new signals because their timing (in relation to every bus cycle) is pre-defined by this specification. The name and operation of a data tag must be defined in the WISHBONE DATASHEET.',
         wire: {
-          onMaster: { presence: 'required', direction: 'in'  }, // TGD_I
-          onSlave:  { presence: 'required', direction: 'out' }, // TGD_O
+          onInitiator: { presence: 'required', direction: 'in'  }, // TGD_I
+          onTarget:  { presence: 'required', direction: 'out' }, // TGD_O
         }
       },
       TGA: {
         description: 'Address tag type [TGA()] contains information associated with address lines [ADR()], and is qualified by signal [STB]. For example, address size (24-bit, 32-bit etc.) and memory management (protected vs. unprotected) information can be attached to an address. These tag bits simplify the task of defining new signals because their timing (in relation to every bus cycle) is defined by this specification. The name and operation of an address tag must be defined in the WISHBONE DATASHEET.',
         wire: {
-          onMaster: { presence: 'required', direction: 'out' }, // TGA_O
-          onSlave:  { presence: 'required', direction: 'in'  }, // TGA_I
+          onInitiator: { presence: 'required', direction: 'out' }, // TGA_O
+          onTarget:  { presence: 'required', direction: 'in'  }, // TGA_I
         }
       },
       TGC: {
         description: 'Cycle tag type [TGC()] contains information associated with bus cycles, and is qualified by signal [CYC]. For example, data transfer, interrupt acknowledge and cache control cycles can be uniquely identified with the cycle tag. They can also be used to discriminate between WISHBONE SINGLE, BLOCK and RMW cycles. These tag bits simplify the task of defining new signals because their timing (in relation to every bus cycle) is defined by this specification. The name and operation of a cycle tag must be defined in the WISHBONE DATASHEET.',
         wire: {
-          onMaster: { presence: 'required', direction: 'out' }, // TGC_O
-          onSlave:  { presence: 'required', direction: 'in'  }, // TGC_I
+          onInitiator: { presence: 'required', direction: 'out' }, // TGC_O
+          onTarget:  { presence: 'required', direction: 'in'  }, // TGC_I
         }
       },
 
@@ -126,22 +126,22 @@
       ERR: {
         description: 'The error [ERR] indicates an abnormal cycle termination. The source of the error, and the response generated by the MASTER is defined by the IP core supplier. Also see the [ACK] and [RTY] signal descriptions.',
         wire: {
-          onMaster: { width: 1, direction: 'in'  }, // ERR_I
-          onSlave:  { width: 1, direction: 'out' }, // ERR_O
+          onInitiator: { width: 1, direction: 'in'  }, // ERR_I
+          onTarget:  { width: 1, direction: 'out' }, // ERR_O
         }
       },
       LOCK: {
         description: 'The lock [LOCK] when asserted, indicates that the current bus cycle is uninterruptible. Lock is asserted to request complete ownership of the bus. Once the transfer has started, the INTERCON does not grant the bus to any other MASTER, until the current MASTER negates [LOCK] or [CYC].',
         wire: {
-          onMaster: { presence: 'required', width: 1, direction: 'out' }, // LOCK_O
-          onSlave:  { presence: 'required', width: 1, direction: 'in'  }, // LOCK_I
+          onInitiator: { presence: 'required', width: 1, direction: 'out' }, // LOCK_O
+          onTarget:  { presence: 'required', width: 1, direction: 'in'  }, // LOCK_I
         }
       },
       RTY: {
         description: 'The retry [RTY] indicates that the interface is not ready to accept or send data, and that the cycle should be retried. When and how the cycle is retried is defined by the IP core supplier. Also see the [ERR] and [RTY] signal descriptions.',
         wire: {
-          onMaster: { presence: 'required', width: 1, direction: 'in'  }, // RTY_I
-          onSlave:  { presence: 'required', width: 1, direction: 'out' }, // RTY_O
+          onInitiator: { presence: 'required', width: 1, direction: 'in'  }, // RTY_I
+          onTarget:  { presence: 'required', width: 1, direction: 'out' }, // RTY_O
         }
       },
 

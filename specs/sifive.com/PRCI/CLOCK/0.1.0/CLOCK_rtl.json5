@@ -15,8 +15,8 @@
         description: 'clock signals',
         wire: {
           isClock: true,
-          onMaster: {direction: 'out', presence: 'required'},
-          onSlave:  {direction: 'in', presence: 'required'}
+          onInitiator: {direction: 'out', presence: 'required'},
+          onTarget:  {direction: 'in', presence: 'required'}
         }
       }
     },
@@ -25,7 +25,8 @@
         description: 'clock frequency in [Hz]',
         oneOf: [{
           type: 'number',
-          description: 'specific frequency'
+          description: 'specific frequency',
+          minimum: 0
         }, {
           type: 'object',
           properties: {
@@ -49,18 +50,3 @@
     }
   }
 }
-
-/* minimum: 1, */
-/* description: 'clock frequency in [Hz]' */
-/* }, { */
-/* type: 'object', */
-/* properties: {
-  minimum: {
-    type: 'number',
-    description: 'minimum clock frequency in [Hz]'
-  },
-  maximum: {
-    type: 'number',
-    description: 'maximum clock frequency in [Hz]'
-  }
-} */

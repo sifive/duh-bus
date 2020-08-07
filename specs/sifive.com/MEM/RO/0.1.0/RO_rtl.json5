@@ -13,46 +13,46 @@
     ports: {
       CLK: {
         description: 'Memory clock',
-        requiresDriver: true,
-        isClock: true,
         wire: {
-          onMaster: {width: 1, direction: 'in'},
-          onSlave:  {width: 1, direction: 'in'}
+          isClock: true,
+          requiresDriver: true,
+          onInitiator: {width: 1, direction: 'in'},
+          onTarget:  {width: 1, direction: 'in'}
         }
       },
       RDEN: {
         description: 'Read enable',
         wire: {
-          onMaster: {width: 1, direction: 'out'},
-          onSlave:  {width: 1, direction: 'in'}
+          onInitiator: {width: 1, direction: 'out'},
+          onTarget:  {width: 1, direction: 'in'}
         }
       },
       BEN: {
         description: 'Byte enable',
         wire: {
-          onMaster: {width: 'BEN_WIDTH', direction: 'out'},
-          onSlave:  {width: 'BEN_WIDTH', direction: 'in'}
+          onInitiator: {width: 'BEN_WIDTH', direction: 'out'},
+          onTarget:  {width: 'BEN_WIDTH', direction: 'in'}
         }
       },
       ADDR: {
         description: 'Read / Write port address',
         wire: {
-          onMaster: {width: 'ADDR_WIDTH', direction: 'out', presence: 'required'},
-          onSlave:  {width: 'ADDR_WIDTH', direction: 'in', presence: 'required'}
+          onInitiator: {width: 'ADDR_WIDTH', direction: 'out', presence: 'required'},
+          onTarget:  {width: 'ADDR_WIDTH', direction: 'in', presence: 'required'}
         }
       },
       RDDATA: {
         description: 'Read port data',
         wire: {
-          onMaster: {width: 'DATA_WIDTH', direction: 'in', presence: 'required'},
-          onSlave:  {width: 'DATA_WIDTH', direction: 'out', presence: 'required'}
+          onInitiator: {width: 'DATA_WIDTH', direction: 'in', presence: 'required'},
+          onTarget:  {width: 'DATA_WIDTH', direction: 'out', presence: 'required'}
         }
       },
       RDERR: {
         description: 'If ECC feature is present, this signals that an undorrectable error was detected on the read data',
         wire: {
-          onMaster: {direction: 'in'},
-          onSlave:  {direction: 'out'}
+          onInitiator: {direction: 'in'},
+          onTarget:  {direction: 'out'}
         }
       }
     }

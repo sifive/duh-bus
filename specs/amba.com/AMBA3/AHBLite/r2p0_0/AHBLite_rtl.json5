@@ -15,12 +15,12 @@
         description: 'The bus clock times all bus transfers. All signal timings are related to the rising edge of HCLK.',
         wire: {
           isClock: true,
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'in',
@@ -32,12 +32,12 @@
         description: 'The bus reset signal is active LOW and resets the system and the bus. This is the only active LOW AHB-Lite signal.',
         wire: {
           isReset: true,
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'in',
@@ -49,11 +49,11 @@
         description: 'The 32-bit system address bus, but the width is variable',
         wire: {
           isAddress: true,
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             direction: 'in',
           },
@@ -63,12 +63,12 @@
       HBURST: {
         description: 'The burst type indicates if the transfer is a single transfer or forms part of a burst.Fixed length bursts of 4, 8, and 16 beats are supported. The burst can be incrementing or wrapping. Incrementing bursts of undefined length are also supported.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             width: 3,
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             width: 3,
             direction: 'in',
@@ -78,12 +78,12 @@
       HMASTLOCK: {
         description: 'When HIGH, this signal indicates that the current transfer is part of a locked sequence. It has the same timing as the address and control signals.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 1,
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'in',
@@ -94,12 +94,12 @@
       HPROT: {
         description: 'The protection control signals provide additional information about a bus access and are primarily intended for use by any module that wants to implement some level of protection.\nThe signals indicate if the transfer is an opcode fetch or data access, and if the transfer is a privileged mode access or user mode access. For masters with a memory management unit these signals also indicate whether the current access is cacheable or bufferable.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 4,
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 4,
             direction: 'in',
@@ -110,12 +110,12 @@
       HSIZE: {
         description: 'Indicates the size of the transfer, that is typically byte, halfword, or word. The protocol allows for larger transfer sizes up to a maximum of 1024 bits.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             width: 3,
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             width: 3,
             direction: 'in',
@@ -125,12 +125,12 @@
       HTRANS: {
         description: 'Indicates the transfer type of the current transfer. This can be:\n1-IDLE\n2- BUSY\n3- NONSEQUENTIAL\n4- SEQUENTIAL',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             width: 2,
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             width: 2,
             direction: 'in',
@@ -141,11 +141,11 @@
         description: 'The write data bus transfers data from the master to the slaves during write operations. A minimum data bus width of 32 bits is recommended. However, this can be extended to enable higher bandwidth operation.',
         wire: {
           isData: true,
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             direction: 'in',
           },
@@ -155,12 +155,12 @@
       HWRITE: {
         description: 'Indicates the transfer direction. When HIGH this signal indicates a write transfer and when LOW a read transfer. It has the same timing as the address signals, however, it must remain constant throughout a burst transfer.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             width: 1,
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             width: 1,
             direction: 'in',
@@ -171,11 +171,11 @@
         description: 'During read operations, the read data bus transfers data from the selected slave to the multiplexor. The multiplexor then transfers the data to the master. A minimum data bus width of 32 bits is recommended. However, this can be extended to enable higher bandwidth operation.',
         wire: {
           isData: true,
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             direction: 'out',
           },
@@ -185,10 +185,10 @@
       HREADYOUT: {
         description: 'When HIGH, the HREADYOUT signal indicates that a transfer has finished on the bus. This signal can be driven LOW to extend a transfer.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'illegal',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             width: 1,
             direction: 'out',
@@ -198,12 +198,12 @@
       HRESP: {
         description: 'The transfer response, after passing through the multiplexor, provides the master with additional information on the status of a transfer.\nWhen LOW, the HRESP signal indicates that the transfer status is OKAY.\nWhen HIGH, the HRESP signal indicates that the transfer status is ERROR.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             width: 1,
             direction: 'out',
@@ -213,10 +213,10 @@
       HSELx: {
         description: 'Each AHB-Lite slave has its own slave select signal HSELx and this signal indicates that the current transfer is intended for the selected slave. When the slave is initially selected, it must also monitor the status of HREADY to ensure that the previous bus transfer has completed,before it responds to the current transfer.\nThe HSELx signal is a combinatorial decode of the address bus.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'illegal',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             width: 1,
             direction: 'in',
@@ -226,12 +226,12 @@
       HREADY: {
         description: 'The transfer response, after passing through the multiplexor, provides the master with additional information on the status of a transfer.\nWhen LOW, the HRESP signal indicates that the transfer status is OKAY.\nWhen HIGH, the HRESP signal indicates that the transfer status is ERROR.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'required',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'required',
             width: 1,
             direction: 'in',
@@ -241,12 +241,12 @@
       HCLKEN: {
         description: 'This is an optional enable signal for HCLK domain',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             width: 1,
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             width: 1,
             direction: 'in',
@@ -258,11 +258,11 @@
       HRUSER: {
         description: 'This is an optional read channel user signal that is not part of the official specification. The use is user specific.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             direction: 'in',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             direction: 'out',
           },
@@ -272,11 +272,11 @@
       HWUSER: {
         description: 'This is an optional write channel user signal that is not part of the official specification. The use is user specific.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             direction: 'in',
           },
@@ -286,11 +286,11 @@
       HAUSER: {
         description: 'This is an optional user signal that is not part of the official specification. The use is user specific.',
         wire: {
-          onMaster: {
+          onInitiator: {
             presence: 'optional',
             direction: 'out',
           },
-          onSlave: {
+          onTarget: {
             presence: 'optional',
             direction: 'in',
           },
