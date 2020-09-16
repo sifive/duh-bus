@@ -24,7 +24,7 @@
         messages sent to a particular address. This channel is used by all
         TileLink conformance levels and is mandatory.
       */
-      a_code: {
+      a_opcode: {
         description: 'Operation code. Identifies the type of message carried by the channel.',
         wire: {
           onInitiator: {direction: 'out', width: 3},
