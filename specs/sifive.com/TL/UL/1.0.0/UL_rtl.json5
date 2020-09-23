@@ -102,6 +102,13 @@
           onTarget:  {direction: 'out', width: 3}
         }
       },
+      d_param: {
+        description: 'Parameter code. Meaning depends on d_opcode; specifies permissions to transfer or a sub-opcode.',
+        wire: {
+          onInitiator: {direction: 'in',  width: 2},
+          onTarget:  {direction: 'out', width: 2}
+        }
+      },
       d_size: {
         description: 'Logarithm of the operation size: 2^n bytes.',
         wire: {
@@ -114,6 +121,13 @@
         wire: {
           onInitiator: {direction: 'in',  /* width: 'o' */},
           onTarget:  {direction: 'out', /* width: 'o' */}
+        }
+      },
+      d_sink: {
+        description: 'Per-link slave sink identifier.',
+        wire: {
+          onInitiator: {direction: 'in',  /* width: 'i' */},
+          onTarget:  {direction: 'out', /* width: 'i' */}
         }
       },
       d_denied: {

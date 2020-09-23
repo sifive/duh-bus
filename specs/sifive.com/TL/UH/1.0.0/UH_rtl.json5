@@ -130,6 +130,13 @@
           onTarget:  {direction: 'out', /* width: 'o' */}
         }
       },
+      d_sink: {
+        description: 'Per-link slave sink identifier.',
+        wire: {
+          onInitiator: {direction: 'in',  /* width: 'i' */},
+          onTarget:  {direction: 'out', /* width: 'i' */}
+        }
+      },
       d_denied: {
         description: 'The slave was unable to service the request.',
         wire: {
