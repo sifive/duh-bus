@@ -60,8 +60,8 @@
         },
         vendorExtensions: [],
       },
-      PSEL: {
-        description: 'Select - The APB bridge unit generates this signal to each peripheral bus slave. It indicates that the slave device is selected and that a data transfer is required.There is a PSEL signal for each slave.',
+      PSELx: {
+        description: 'Select - The APB bridge unit generates this signal to each peripheral bus slave. It indicates that the slave device is selected and that a data transfer is required.There is a PSELx signal for each slave.',
         wire: {
           onInitiator: {
             presence: 'required',
