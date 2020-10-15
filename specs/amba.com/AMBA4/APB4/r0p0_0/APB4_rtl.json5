@@ -16,12 +16,12 @@
         wire: {
           isClock: true,
           onInitiator: {
-            presence: 'optional',
+            // presence: 'required', // deviation
             width: 1,
             direction: 'in',
           },
           onTarget: {
-            presence: 'optional',
+            // presence: 'required', // deviation
             width: 1,
             direction: 'in',
           },
@@ -33,12 +33,12 @@
         wire: {
           isReset: true,
           onInitiator: {
-            presence: 'optional',
+            // presence: 'required', // deviation
             width: 1,
             direction: 'in',
           },
           onTarget: {
-            presence: 'optional',
+            // presence: 'required', // deviation
             width: 1,
             direction: 'in',
           },
@@ -79,12 +79,12 @@
         description: 'Enable - This signal indicates the second and subsequent cycles of an APB transfer.',
         wire: {
           onInitiator: {
-            // presence: 'required',
+            // presence: 'required', // deviation
             width: 1,
             direction: 'out',
           },
           onTarget: {
-            // presence: 'required',
+            // presence: 'required', // deviation
             width: 1,
             direction: 'in',
           },
@@ -111,14 +111,15 @@
           isData: true,
           onInitiator: {
             presence: 'required',
+            // width: '8 * RD' = [8, 16, 32]
             direction: 'in',
           },
           onTarget: {
             presence: 'required',
+            // width: '8 * RD' = [8, 16, 32]
             direction: 'out',
           },
         },
-        vendorExtensions: [],
       },
       PWDATA: {
         description: 'Write data - This bus is driven by the peripheral bus bridge unit during write cycles when PWRITE is HIGH. This bus can be up to 32 bits wide.',
@@ -126,46 +127,46 @@
           isData: true,
           onInitiator: {
             presence: 'required',
+            // width: '8 * WD' = [8, 16, 32]
             direction: 'out',
           },
           onTarget: {
             presence: 'required',
+            // width: '8 * WD' = [8, 16, 32]
             direction: 'in',
           },
         },
-        vendorExtensions: [],
       },
       PPROT: {
         description: 'Protection type - This signal indicates the normal, privileged, or secure protection level of the transaction and whether the transaction is a data access or an instruction access.',
         wire: {
           isData: true,
           onInitiator: {
-            presence: 'optional',
             width: 3,
             direction: 'out',
           },
           onTarget: {
-            presence: 'optional',
+            // presence: 'required', // deviation
             width: 3,
             direction: 'in',
           },
         },
-        vendorExtensions: [],
       },
       PSTRB: {
         description: 'Write strobes - This signal indicates which byte lanes to update during a write transfer. There is one write strobe for each eight bits of the write data bus.\nTherefore, PSTRB[n] corresponds to PWDATA[(8n + 7):(8n)]. Write strobes must not be active during a read transfer.',
         wire: {
           isData: true,
           onInitiator: {
-            presence: 'optional',
+            // width: 'WD' = [1, 2, 4] // deviation was 4
             direction: 'out',
           },
           onTarget: {
-            presence: 'optional',
+            presence: 'required',
+            // width: 'WD' = [1, 2, 4] // deviation was 4
             direction: 'in',
           },
+          defaultValue: -1, // 15 all-ones
         },
-        vendorExtensions: [],
       },
       PREADY: {
         description: 'Ready - The slave uses this signal to extend an APB transfer',
@@ -176,7 +177,6 @@
             direction: 'in',
           },
           onTarget: {
-            presence: 'optional',
             width: 1,
             direction: 'out',
           },
@@ -192,7 +192,6 @@
             direction: 'in',
           },
           onTarget: {
-            presence: 'optional',
             width: 1,
             direction: 'out',
           },
@@ -203,18 +202,15 @@
         description: 'This is an optional enable signal for PCLK domain',
         wire: {
           onInitiator: {
-            presence: 'optional',
             width: 1,
             direction: 'in',
           },
           onTarget: {
-            presence: 'optional',
             width: 1,
             direction: 'in',
           },
           defaultValue: 1,
         },
-        vendorExtensions: [],
       },
     },
     description: 'The current file describes the RTL view of an APB interface',
