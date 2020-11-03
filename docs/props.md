@@ -12,7 +12,7 @@ DUH component document may instantiate one or more Bus Interfaces (busInterface)
 
 ```js
 {component: {
-  <compVLNV>,
+  ...
   busInterfaces: [
     {name, interfaceMode, busType: {<busVLNV>}}
     ...
@@ -28,16 +28,17 @@ For example: RTL abstraction requires `ports -> logPort -> wire` element.
 
 ```js
 {abstractionDefinition: {
-  <busVLNVrtl>,
-  busType: { <busVLNV> },
+  <busVLNVrtl>, // abstraction signature
+  busType: { <busVLNV> }, // bus type signature
   ports: {
-    logPort: {
-      wire: {
+    LogPort: { // declare logical port
+      wire: { // physical port expectations
         onInitiator: { presence, width, direction },
-        onTarget: { presence, width, direction },
+        onTarget:    { presence, width, direction },
         requiresDriver
       }
     }
+    ...
   }
 }}
 ```
@@ -48,37 +49,22 @@ DUH component can describe abstraction type view (**viewRef**) of specific **bus
 
 ```js
 {component: {
-  <compVLNV>,
+  ...
   model: {ports: {
     phyPort: 1 // direction and width
   }},
   busInterfaces: [{
     name, interfaceMode,
-    busType: { <busVLNV> },
+    busType: { <busVLNV> }, // reference to bus type signature
     abstractionTypes: [{
       viewRef: 'RTLview',
+      abstractionRef: <busVLNVrtl> // reference to abstraction signature
       portMaps: {
-        logPort: 'phyPort'
+        LogPort: 'phyPort' // logical mapping of physical port
+        ...
       }
     }]
   }],
-}}
-```
-
-
-```js
-{abstractionDefinition: {
-  <busVLNVrtl>,
-  busType: { <busVLNV> },
-  ports: {
-    logPort: {
-      wire: {
-        onInitiator: { presence, width, direction },
-        onTarget: { presence, width, direction },
-        requiresDriver
-      }
-    }
-  }
 }}
 ```
 
@@ -91,16 +77,14 @@ abstractionDefinition document can define:
 ```js
 {abstractionDefinition: {
   <busVLNVrtl>,
-  busType: { <busVLNV> },
-  ports: { ... },
-  props: {
-    writeInterleavingDepth: {type: 'integer', ... }, // JSON schema
+  ...
+  props: { // schema of own properties (immediate constraints)
+    writeInterleavingDepth:  {type: 'integer', ... }, // JSON schema
     outstandingTransactions: { ... }
-    ...
   },
-  assertions: [
+  assertions: [ // cross constraints between initiator and target on connect
     'writeInterleavingDepth.onTarget >= writeInterleavingDepth.onInitiator',
-    'outstandingTransactions.onTarget == outstandingTransactions.onInitiator'
+    'outstandingTransactions.onTarget == outstandingTransactions.onInitiator'    
   ]
 }}
 ```
@@ -111,26 +95,49 @@ abstractionDefinition document can define:
 
 ```js
 {component: {
-  <compVLNV>,
-  props: { // or pSchema now
-    DW: {type: 'integer'}, // JSON schema
+  <comp1VLNV>,
+  props: { // schema of own properties (immediate constraints)
+    DW: {type: 'integer'},
     outstanding: {type: 'integer', default: 0} // may have default
   },
   model: {ports: {
     axi1_wdata: '-(8 * DW)' // integer expression
   }},
   busInterfaces: [{
-    name: 'name1',
-    interfaceMode,
-    busType: { <busVLNV> },
+    name: 'axi_i', interfaceMode, busType,
     abstractionTypes: [{
       viewRef: 'RTLview',
-      portMaps: { ... }
+      portMaps: {
+        WDATA: 'axi1_wdata'
+      }
     }]
   }],
+  assertions: [ // boolean expressions
+    'busInterface.axi_i.writeInterleavingDepth == 4',
+    'busInterface.axi_i.outstandingTransactions == outstanding'
+    // interface or own properties
+  ]
+}}
+```
+
+```js
+{design:{
+  <designVLNV>,
+  instances: [
+    {name: 'u1', ref: <comp1VLNV>},
+    {name: 'u2', ref: <comp2VLNV>},
+    ...
+  ],
+  connections: [
+    {source: ['u1', 'axi_i'], target: ['u2', 'axi_t']},
+    // check busType level cross constraints
+  ],
+  props: {
+    WIDTH: {type: 'integer', default: 32}
+  },
   assertions: [
-    'busInterface.name1.writeInterleavingDepth == 4',
-    'busInterface.name1.outstandingTransactions == outstanding'
+    'instance.u1.DW == instance.u2.DW',
+    'instance.u1.DW == WIDTH'
   ]
 }}
 ```
