@@ -15,8 +15,8 @@
         description: 'clock signals',
         wire: {
           isClock: true,
-          onInitiator: {direction: 'out', presence: 'required'},
-          onTarget:  {direction: 'in', presence: 'required'}
+          onInitiator: {direction: 'out', presence: 'required', width: 1},
+          onTarget:  {direction: 'in', presence: 'required', width: 1}
         }
       }
     },

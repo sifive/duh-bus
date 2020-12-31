@@ -15,8 +15,8 @@
         description: 'reset signals',
         wire: {
           isReset: true,
-          onMaster: {direction: 'out', presence: 'required'},
-          onSlave:  {direction: 'in', presence: 'required'}
+          onInitiator: {direction: 'out', presence: 'required', width: 1},
+          onTarget:  {direction: 'in', presence: 'required', width: 1}
         }
       }
     },
