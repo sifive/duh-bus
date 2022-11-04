@@ -791,5 +791,13 @@
         title: 'Maximum number of outstanding transactions'
       },
     },
+    assertions: [
+      'writeInterleavingDepth.onTarget >= writeInterleavingDepth.onInitiator',
+      'readReorderingDepth.onTarget <= readReorderingDepth.onInitiator',
+      'writeReorderingDepth.onTarget <= writeReorderingDepth.onInitiator',
+      'outstandingReads.onTarget == outstandingReads.onInitiator',
+      'outstandingWrites.onTarget == outstandingWrites.onInitiator',
+      'outstandingTransactions.onTarget == outstandingTransactions.onInitiator',
+    ]
   },
 }
