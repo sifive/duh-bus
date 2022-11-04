@@ -31,6 +31,13 @@
           onTarget:  {direction: 'in',  width: 3}
         }
       },
+      a_param: {
+        description: 'Parameter code. Meaning depends on a_opcode; specifies permissions to transfer or a sub-opcode.',
+        wire: {
+          onInitiator: {direction: 'out', width: 3},
+          onTarget:  {direction: 'in',  width: 3}
+        }
+      },
       a_size: {
         description: 'Logarithm of the operation size: 2^n bytes.',
         wire: {
