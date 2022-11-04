@@ -1,0 +1,389 @@
+{
+  abstractionDefinition: {
+    vendor: 'amba.com',
+    library: 'AMBA5',
+    name: 'AHB5Initiator_rtl',
+    version: 'r0p0_0',
+    busType: {
+      vendor: 'amba.com',
+      library: 'AMBA5',
+      name: 'AHB5Initiator',
+      version: 'r0p0_0',
+    },
+    ports: {
+      HCLK: {
+        logicalName: 'HCLK',
+        description: 'The bus clock times all bus transfers. All signal timings are related to the rising edge of HCLK.',
+        wire: {
+          isClock: true,
+          onInitiator: {
+            presence: 'optional',
+            width: 1,
+            direction: 'in',
+          },
+          onTarget: {
+            presence: 'optional',
+            width: 1,
+            direction: 'in',
+          },
+        },
+      },
+      HCLKEN: {
+        logicalName: 'HCLKEN',
+        description: 'This is an optional enable signal for HCLK domain',
+        wire: {
+          onInitiator: {
+            presence: 'optional',
+            width: 1,
+            direction: 'in',
+          },
+          onTarget: {
+            presence: 'optional',
+            width: 1,
+            direction: 'in',
+          },
+          defaultValue: 1,
+        },
+        vendorExtensions: [],
+      },
+      HRESETn: {
+        logicalName: 'HRESETn',
+        description: 'The bus reset signal is active LOW and resets the system and the bus. This is the only active LOW AHB5 signal.',
+        wire: {
+          isReset: true,
+          onInitiator: {
+            presence: 'optional',
+            width: 1,
+            direction: 'in',
+          },
+          onTarget: {
+            presence: 'optional',
+            width: 1,
+            direction: 'in',
+          },
+        },
+      },
+      HADDR: {
+        logicalName: 'HADDR',
+        description: 'The 32-bit system address bus, but the width is variable',
+        wire: {
+          isAddress: true,
+          onInitiator: {
+            presence: 'required',
+            direction: 'out',
+          },
+          onTarget: {
+            presence: 'required',
+            direction: 'in',
+          },
+          defaultValue: 0,
+        },
+      },
+      HBURST: {
+        logicalName: 'HBURST',
+        description: 'The burst type indicates if the transfer is a single transfer or forms part of a burst.Fixed length bursts of 4, 8, and 16 beats are supported. The burst can be incrementing or wrapping. Incrementing bursts of undefined length are also supported.',
+        wire: {
+          onInitiator: {
+            presence: 'optional',
+            width: 3,
+            direction: 'out',
+          },
+          onTarget: {
+            presence: 'optional',
+            width: 3,
+            direction: 'in',
+          },
+          defaultValue: 1,
+        },
+      },
+      HMASTLOCK: {
+        logicalName: 'HMASTLOCK',
+        description: 'When HIGH, this signal indicates that the current transfer is part of a locked sequence. It has the same timing as the address and control signals.',
+        wire: {
+          onInitiator: {
+            presence: 'optional',
+            width: 1,
+            direction: 'out',
+          },
+          onTarget: {
+            presence: 'optional',
+            width: 1,
+            direction: 'in',
+          },
+          defaultValue: 0,
+        },
+      },
+      HPROT: {
+        logicalName: 'HPROT',
+        description: 'The protection control signals provide additional information about a bus access and are primarily intended for use by any module that wants to implement some level of protection.\nThe signals indicate if the transfer is an opcode fetch or data access, and if the transfer is a privileged mode access or user mode access. For masters with a memory management unit these signals also indicate whether the current access is cacheable or bufferable.\nHPROT[6:4] => The 3-bit extension of the HPROT signal that adds extended memory types. This signal extension is supported if the AHB5 Extended_Memory_Types property is True.\nThis specification recommends to provide HPROT[6:0] signaling for a component that only includes  HPROT[3:0] signaling.\nHPROT[4], HPROT[6] should be replicated from HPROT[3],\nHPROT[5] should be set to a default value of 0',
+        wire: {
+          onInitiator: {
+            presence: 'optional',
+            width: 7,
+            direction: 'out',
+          },
+          onTarget: {
+            presence: 'optional',
+            direction: 'in',
+          },
+          defaultValue: 0,
+        },
+      },
+      HSIZE: {
+        logicalName: 'HSIZE',
+        description: 'Indicates the size of the transfer, that is typically byte, halfword, or word. The protocol allows for larger transfer sizes up to a maximum of 1024 bits.',
+        wire: {
+          onInitiator: {
+            presence: 'required',
+            width: 3,
+            direction: 'out',
+          },
+          onTarget: {
+            presence: 'required',
+            width: 3,
+            direction: 'in',
+          },
+        },
+      },
+      HNONSEC: {
+        logicalName: 'HNONSEC',
+        description: 'Indicates if the current transfer is a Non-secure or Secure transfer.\nSee section 3.9. Secure Transfers, for more details.\nThis signal is supported if the Secure_Transfers property is True\n',
+        wire: {
+          onInitiator: {
+            presence: 'optional',
+            width: 1,
+            direction: 'out',
+          },
+          onTarget: {
+            presence: 'optional',
+            width: 1,
+            direction: 'in',
+          },
+        },
+        vendorExtensions: [],
+      },
+      HEXCL: {
+        logicalName: 'HEXCL',
+        description: 'Exclusive Transfer. This signal indicates that the transfer is part of an Exclusive Access Sequence. This signal is an address phase signal and has the same validity constraints as HADDR.',
+        wire: {
+          onInitiator: {
+            presence: 'optional',
+            width: 1,
+            direction: 'out',
+          },
+          onTarget: {
+            presence: 'optional',
+            width: 1,
+            direction: 'in',
+          },
+          defaultValue: 0,
+        },
+      },
+      HMASTER: {
+        logicalName: 'HMASTER',
+        description: 'Master Identifier. A master that has multiple exclusive capable threads must generate this signal to differentiate between the threads. The HMASTER value generated by the master will be combined with an interconnect value to ensure the resultant HMASTER value presented to the Exclusive Access Monitor is unique. A master that only has a single exclusive capable thread does not need to generate this signal. This signal is an address phase signal and has the same validity constraints as HADDR.',
+        wire: {
+          onInitiator: {
+            presence: 'optional',
+            direction: 'out',
+          },
+          onTarget: {
+            presence: 'optional',
+            direction: 'in',
+          },
+          defaultValue: 0,
+        },
+      },
+      HTRANS: {
+        logicalName: 'HTRANS',
+        description: 'Indicates the transfer type of the current transfer. This can be:\n0-IDLE\n1- BUSY\n2- NONSEQUENTIAL\n3- SEQUENTIAL',
+        wire: {
+          onInitiator: {
+            presence: 'required',
+            width: 2,
+            direction: 'out',
+          },
+          onTarget: {
+            presence: 'required',
+            width: 2,
+            direction: 'in',
+          },
+        },
+      },
+      HWDATA: {
+        logicalName: 'HWDATA',
+        description: 'The write data bus transfers data from the master to the slaves during write operations. A minimum data bus width of 32 bits is recommended. However, this can be extended to enable higher bandwidth operation.',
+        wire: {
+          isData: true,
+          onInitiator: {
+            presence: 'required',
+            direction: 'out',
+          },
+          onTarget: {
+            presence: 'required',
+            direction: 'in',
+          },
+          defaultValue: 0,
+        },
+      },
+      HWRITE: {
+        logicalName: 'HWRITE',
+        description: 'Indicates the transfer direction. When HIGH this signal indicates a write transfer and when LOW a read transfer. It has the same timing as the address signals, however, it must remain constant throughout a burst transfer.',
+        wire: {
+          onInitiator: {
+            presence: 'required',
+            width: 1,
+            direction: 'out',
+          },
+          onTarget: {
+            presence: 'required',
+            width: 1,
+            direction: 'in',
+          },
+        },
+      },
+      HRDATA: {
+        logicalName: 'HRDATA',
+        description: 'During read operations, the read data bus transfers data from the selected slave to the multiplexor. The multiplexor then transfers the data to the master. A minimum data bus width of 32 bits is recommended. However, this can be extended to enable higher bandwidth operation.',
+        wire: {
+          isData: true,
+          onInitiator: {
+            presence: 'required',
+            direction: 'in',
+          },
+          onTarget: {
+            presence: 'required',
+            direction: 'out',
+          },
+          defaultValue: 0,
+        },
+      },
+      HREADYOUT: {
+        logicalName: 'HREADYOUT',
+        description: 'When HIGH, the HREADYOUT signal indicates that a transfer has finished on the bus. This signal can be driven LOW to extend a transfer.',
+        wire: {
+          onInitiator: {
+            presence: 'illegal',
+          },
+          onTarget: {
+            presence: 'illegal',
+          },
+        },
+      },
+      HRESP: {
+        logicalName: 'HRESP',
+        description: 'The transfer response, after passing through the multiplexor, provides the master with additional information on the status of a transfer.\nWhen LOW, the HRESP signal indicates that the transfer status is OKAY.\nWhen HIGH, the HRESP signal indicates that the transfer status is ERROR.',
+        wire: {
+          onInitiator: {
+            presence: 'required',
+            width: 1,
+            direction: 'in',
+          },
+          onTarget: {
+            presence: 'required',
+            width: 1,
+            direction: 'out',
+          },
+        },
+      },
+      HEXOKAY: {
+        logicalName: 'HEXOKAY',
+        description: 'Indicates the success or failure of an Exclusive Transfer.\nThis signal is supported if the Exclusive_Transfers property is True.\n',
+        wire: {
+          onInitiator: {
+            presence: 'optional',
+            width: 1,
+            direction: 'in',
+          },
+          onTarget: {
+            presence: 'optional',
+            width: 1,
+            direction: 'out',
+          },
+          defaultValue: 0,
+        },
+      },
+      HSELx: {
+        logicalName: 'HSELx',
+        description: 'Each AHB5 slave has its own slave select signal HSELx and this signal indicates that the current transfer is intended for the selected slave. When the slave is initially selected, it must also monitor the status of HREADY to ensure that the previous bus transfer has completed,before it responds to the current transfer.\nThe HSELx signal is a combinatorial decode of the address bus.',
+        wire: {
+          onInitiator: {
+            presence: 'illegal',
+          },
+          onTarget: {
+            presence: 'illegal',
+          },
+        },
+      },
+      HREADY: {
+        logicalName: 'HREADY',
+        description: 'When HIGH, the HREADY signal indicates to the master and all slaves, that the previous transfer is complete.',
+        wire: {
+          onInitiator: {
+            presence: 'required',
+            width: 1,
+            direction: 'in',
+          },
+          onTarget: {
+            presence: 'required',
+            width: 1,
+            direction: 'out',
+          },
+        },
+      },
+      HRUSER: {
+        logicalName: 'HRUSER',
+        description: 'This is an optional read channel user signal. The use is user specific.',
+        isUser: true,
+        group: 'HR',
+        wire: {
+          onInitiator: {
+            presence: 'optional',
+            direction: 'in',
+          },
+          onTarget: {
+            presence: 'optional',
+            direction: 'out',
+          },
+          defaultValue: 0,
+        },
+      },
+      HWUSER: {
+        logicalName: 'HWUSER',
+        description: 'This is an optional write channel user signal. The use is user specific.',
+        isUser: true,
+        group: 'HW',
+        wire: {
+          onInitiator: {
+            presence: 'optional',
+            direction: 'out',
+          },
+          onTarget: {
+            presence: 'optional',
+            direction: 'in',
+          },
+          defaultValue: 0,
+        },
+      },
+      HAUSER: {
+        logicalName: 'HAUSER',
+        description: 'This is an optional address channel user signal. The use is user specific.',
+        isUser: true,
+        group: 'HA',
+        wire: {
+          onInitiator: {
+            presence: 'optional',
+            direction: 'out',
+          },
+          onTarget: {
+            presence: 'optional',
+            direction: 'in',
+          },
+          defaultValue: 0,
+        },
+      },
+    },
+    description: 'AHB5 initiator updated according to spec ARM IHI 0033B.b (ID102715). The bus definition is intended to use with interfaces associated with initiator device connections (those between the bus master and the interconnect). This is an update to the AHBLite features released with AMBA3. It improves memory type support (HPROT on 7 bits), HMASTLOCK can be asserted with different schemes, secured, locked and exclusive transfers are now supported with additional signals. Atomicity is also introduced.',
+    vendorExtensions: [],
+  },
+}
