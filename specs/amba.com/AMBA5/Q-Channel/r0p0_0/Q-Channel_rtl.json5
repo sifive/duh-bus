@@ -1,0 +1,49 @@
+{
+  abstractionDefinition: {
+    vendor: 'amba.com',
+    library: 'AMBA5',
+    name: 'Q-Channel_rtl',
+    version: 'r0p0_0',
+    busType: {
+      vendor: 'amba.com',
+      library: 'AMBA5',
+      name: 'Q-Channel',
+      version: 'r0p0_0',
+    },
+    ports: {
+      // Clock or Power Controller :Initiator
+      // Device :Target
+      QREQn: {
+        description: 'A quiescence request signal',
+        wire: {
+          onInitiator:  {presence: 'required', width: 1, direction: 'out'},
+          onTarget:     {presence: 'required', width: 1, direction: 'in'},
+        }
+      },
+      QACCEPTn: {
+        description: 'Active HIGH acceptance of the request',
+        wire: {
+          onInitiator:  {presence: 'required', width: 1, direction: 'in'},
+          onTarget:     {presence: 'required', width: 1, direction: 'out'},
+        }
+      },
+      QDENY: {
+        description: 'Active HIGH denial of the request.',
+        wire: {
+          onInitiator:  {presence: 'required', width: 1, direction: 'in'},
+          onTarget:     {presence: 'required', width: 1, direction: 'out'},
+        }
+      },
+      QACTIVE: {
+        description: 'HIGH in any state to indicate that it has operations to perform. When LOW it is a hint, not a guarantee, that the device might accept a quiescence request',
+        wire: {
+          onInitiator:  {presence: 'required', width: 1, direction: 'in'},
+          onTarget:     {presence: 'required', width: 1, direction: 'out'},
+        }
+      },
+    },
+    description: 'This defines the signals when implementing an Q-Channel interface on RTL views',
+    props: {},
+    assertions: []
+  }
+}

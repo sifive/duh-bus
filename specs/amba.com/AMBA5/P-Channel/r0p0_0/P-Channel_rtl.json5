@@ -11,6 +11,8 @@
       version: 'r0p0_0',
     },
     ports: {
+      // Power Controller :Initiator
+      // Device :Target
       PACTIVE: {
         description: 'Device activity indication',
         wire: {
