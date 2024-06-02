@@ -4,7 +4,7 @@
   "description": "Bus definition DUH documents",
   "main": "index.js",
   "bin": {
-    "cli": "./bin/cli.js"
+    "duh-bus": "bin/duh-bus.js"
   },
   "scripts": {
     "test": "eslint bin && nyc -r=text -r=lcov mocha",
