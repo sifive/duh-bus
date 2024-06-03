@@ -12,6 +12,7 @@
   },
   "files": [
     "index.js",
+    "lib/",
     "specs/"
   ],
   "unpkg": "index.js",
