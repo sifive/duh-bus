@@ -34,7 +34,7 @@ async function main () {
     xassign(arr, body);
   }
 
-  fs.writeFileSync('./index.js', `'use strict';\n`, 'utf8');
+  fs.writeFileSync('./index.js', '\'use strict\';\n', 'utf8');
   const root = path.resolve(process.cwd(), 'specs');
   if (fs.pathExistsSync(root)) {
 

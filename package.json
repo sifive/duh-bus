@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/sifive/duh-bus#readme",
   "eslintConfig": {
-    "extends": "@drom/eslint-config/eslint4/node8"
+    "extends": "@drom/eslint-config/eslint8/node12"
   },
   "devDependencies": {
     "@drom/eslint-config": "^0.12.0",
