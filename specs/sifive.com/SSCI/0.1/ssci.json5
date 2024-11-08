@@ -1,14 +1,14 @@
 {
   "abstractionDefinition": {
     "vendor": "sifive.com",
-    "library": "SCIE",
-    "name": "decoder_rtl",
-    "version": "0.1.0",
+    "library": "SSCI",
+    "name": "ssci",
+    "version": "0.1",
     "busType": {
       "vendor": "sifive.com",
-      "library": "SCIE",
-      "name": "decoder",
-      "version": "0.1.0"
+      "library": "SSCI",
+      "name": "ssci",
+      "version": "0.1"
     },
     "ports": {
       "clock": {
