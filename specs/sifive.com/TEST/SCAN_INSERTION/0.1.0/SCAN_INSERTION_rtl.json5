@@ -1,0 +1,66 @@
+{
+  abstractionDefinition: {
+    vendor: 'sifive.com',
+    library: 'TEST',
+    name: 'SCAN_INSERTION_rtl',
+    version: '0.1.0',
+    busType: {
+      vendor: 'sifive.com',
+      library: 'TEST',
+      name: 'SCAN_INSERTION',
+      version: '0.1.0',
+    },
+    ports: {
+      CLOCK: {
+        description: 'Clock used during scan',
+        isClock: true,
+        wire: {
+          onMaster: {width: 1, direction: 'out', presence: 'required'},
+          onSlave:  {width: 1, direction: 'in', presence: 'required'}
+        }
+      },
+      CLOCK_EN: {
+        description: 'Clock enable on the scan clock path',
+        wire: {
+          onMaster: {width: 1, direction: 'out'},
+          onSlave:  {width: 1, direction: 'in'}
+        }
+      },
+      RESET: {
+        description: 'Reset used during scan (active high)',
+        wire: {
+          onMaster: {width: 1, direction: 'out'},
+          onSlave:  {width: 1, direction: 'in'}
+        }
+      },
+      TEST_MODE: {
+        description: 'switch into test mode',
+        wire: {
+          onMaster: {direction: 'out'},
+          onSlave:  {direction: 'in'}
+        }
+      },
+      SE: {
+        description: 'scan chain enable',
+        wire: {
+          onMaster: {direction: 'out'},
+          onSlave:  {direction: 'in'}
+        }
+      },
+      SI: {
+        description: 'scan chain input',
+        wire: {
+          onMaster: {direction: 'out'},
+          onSlave:  {direction: 'in'}
+        }
+      },
+      SO: {
+        description: 'scan chain output',
+        wire: {
+          onMaster: {direction: 'in'},
+          onSlave:  {direction: 'out'}
+        }
+      },
+    }
+  }
+}
