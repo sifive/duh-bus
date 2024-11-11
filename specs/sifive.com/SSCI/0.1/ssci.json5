@@ -1,100 +1,100 @@
 {
-  "abstractionDefinition": {
-    "vendor": "sifive.com",
-    "library": "SSCI",
-    "name": "ssci",
-    "version": "0.1",
-    "busType": {
-      "vendor": "sifive.com",
-      "library": "SSCI",
-      "name": "ssci",
-      "version": "0.1"
+  abstractionDefinition: {
+    vendor: 'sifive.com',
+    library: 'SSCI',
+    name: 'ssci',
+    version: '0.1',
+    busType: {
+      vendor: 'sifive.com',
+      library: 'SSCI',
+      name: 'ssci',
+      version: '0.1',
     },
-    "ports": {
-      "clock": {
-        "description": "Clock at same frequency as core clock",
-        "wire": {
-          "onInitiator": {"width": 1, "direction": "in", "presence": "required"},
-          "onTarget": {"width": 1, "direction": "out", "presence": "required"}
-        }
+    ports: {
+      clock: {
+        description: 'Clock at same frequency as core clock',
+        wire: {
+          onInitiator: { width: 1, direction: 'in', presence: 'required' },
+          onTarget: { width: 1, direction: 'out', presence: 'required' },
+        },
       },
-      "reset": {
-        "description": "Synchronous reset signal, positive polarity",
-        "wire": {
-          "onInitiator": {"width": 1, "direction": "in", "presence": "required"},
-          "onTarget": {"width": 1, "direction": "out", "presence": "required"}
-        }
+      reset: {
+        description: 'Synchronous reset signal, positive polarity',
+        wire: {
+          onInitiator: { width: 1, direction: 'in', presence: 'required' },
+          onTarget: { width: 1, direction: 'out', presence: 'required' },
+        },
       },
-      "io_req_valid": {
-        "description": "Processor is sending a valid command to the coprocessor",
-        "wire": {
-          "onInitiator": {"width": 1, "direction": "in", "presence": "required"},
-          "onTarget": {"width": 1, "direction": "out", "presence": "required"}
-        }
+      io_req_valid: {
+        description: 'Processor is sending a valid command to the coprocessor',
+        wire: {
+          onInitiator: { width: 1, direction: 'in', presence: 'required' },
+          onTarget: { width: 1, direction: 'out', presence: 'required' },
+        },
       },
-      "io_req_ready": {
-        "description": "Coprocessor can accept a new command",
-        "wire": {
-          "onInitiator": {"width": 1, "direction": "out", "presence": "required"},
-          "onTarget": {"width": 1, "direction": "in", "presence": "required"}
-        }
+      io_req_ready: {
+        description: 'Coprocessor can accept a new command',
+        wire: {
+          onInitiator: { width: 1, direction: 'out', presence: 'required' },
+          onTarget: { width: 1, direction: 'in', presence: 'required' },
+        },
       },
-      "io_req_bits_data1": {
-        "description": "Source operand 1",
-        "wire": {
-          "onInitiator": {"width": "XLEN", "direction": "in", "presence": "required"},
-          "onTarget": {"width": "XLEN", "direction": "out", "presence": "required"}
-        }
+      io_req_bits_data1: {
+        description: 'Source operand 1',
+        wire: {
+          onInitiator: { width: 'XLEN', direction: 'in', presence: 'required' },
+          onTarget: { width: 'XLEN', direction: 'out', presence: 'required' },
+        },
       },
-      "io_req_bits_data2": {
-        "description": "Source operand 2",
-        "wire": {
-          "onInitiator": {"width": "XLEN", "direction": "in", "presence": "required"},
-          "onTarget": {"width": "XLEN", "direction": "out", "presence": "required"}
-        }
+      io_req_bits_data2: {
+        description: 'Source operand 2',
+        wire: {
+          onInitiator: { width: 'XLEN', direction: 'in', presence: 'required' },
+          onTarget: { width: 'XLEN', direction: 'out', presence: 'required' },
+        },
       },
-      "io_req_bits_funct7": {
-        "description": "Instruction bits 31..25",
-        "wire": {
-          "onInitiator": {"width": 7, "direction": "in", "presence": "required"},
-          "onTarget": {"width": 7, "direction": "out", "presence": "required"}
-        }
+      io_req_bits_funct7: {
+        description: 'Instruction bits 31..25',
+        wire: {
+          onInitiator: { width: 7, direction: 'in', presence: 'required' },
+          onTarget: { width: 7, direction: 'out', presence: 'required' },
+        },
       },
-      "io_req_bits_funct3": {
-        "description": "Instruction bits 14..12",
-        "wire": {
-          "onInitiator": {"width": 3, "direction": "in", "presence": "required"},
-          "onTarget": {"width": 3, "direction": "out", "presence": "required"}
-        }
+      io_req_bits_funct3: {
+        description: 'Instruction bits 14..12',
+        wire: {
+          onInitiator: { width: 3, direction: 'in', presence: 'required' },
+          onTarget: { width: 3, direction: 'out', presence: 'required' },
+        },
       },
-      "io_req_bits_respond": {
-        "description": "Encodes if a response is required",
-        "wire": {
-          "onInitiator": {"width": 1, "direction": "in", "presence": "required"},
-          "onTarget": {"width": 1, "direction": "out", "presence": "required"}
-        }
+      io_req_bits_respond: {
+        description: 'Encodes if a response is required',
+        wire: {
+          onInitiator: { width: 1, direction: 'in', presence: 'required' },
+          onTarget: { width: 1, direction: 'out', presence: 'required' },
+        },
       },
-      "io_resp_valid": {
-        "description": "Coprocessor is sending a valid response to the processor",
-        "wire": {
-          "onInitiator": {"width": 1, "direction": "out", "presence": "required"},
-          "onTarget": {"width": 1, "direction": "in", "presence": "required"}
-        }
+      io_resp_valid: {
+        description: 'Coprocessor is sending a valid response to the processor',
+        wire: {
+          onInitiator: { width: 1, direction: 'out', presence: 'required' },
+          onTarget: { width: 1, direction: 'in', presence: 'required' },
+        },
       },
-      "io_resp_ready": {
-        "description": "Processor can accept a response",
-        "wire": {
-          "onInitiator": {"width": 1, "direction": "in", "presence": "required"},
-          "onTarget": {"width": 1, "direction": "out", "presence": "required"}
-        }
+      io_resp_ready: {
+        description: 'Processor can accept a response',
+        wire: {
+          onInitiator: { width: 1, direction: 'in', presence: 'required' },
+          onTarget: { width: 1, direction: 'out', presence: 'required' },
+        },
       },
-      "io_resp_bits_data": {
-        "description": "Response data",
-        "wire": {
-          "onInitiator": {"width": "XLEN", "direction": "out", "presence": "required"},
-          "onTarget": {"width": "XLEN", "direction": "in", "presence": "required"}
-        }
-      }
-    }
-  }
+      io_resp_bits_data: {
+        description: 'Response data',
+        wire: {
+          onInitiator: { width: 'XLEN', direction: 'out', presence: 'required' },
+          onTarget: { width: 'XLEN', direction: 'in', presence: 'required' },
+        },
+      },
+    },
+  },
 }
