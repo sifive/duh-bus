@@ -1,0 +1,149 @@
+{
+  abstractionDefinition: {
+    vendor: 'sifive.com',
+    library: 'VCIX',
+    name: 'vcix',
+    version: '1.0',
+    busType: {
+      vendor: 'sifive.com',
+      library: 'VCIX',
+      name: 'vcix',
+      version: '1.0',
+    },
+    ports: {
+      clock: {
+        description: 'Clock (same frequency as core clock).',
+        wire: {
+          onInitiator: { width: 1, direction: 'in', presence: 'required' },
+          onTarget: { width: 1, direction: 'out', presence: 'required' },
+        },
+      },
+      reset: {
+        description: 'Synchronous reset signal, positive polarity.',
+        wire: {
+          onInitiator: { width: 1, direction: 'in', presence: 'required' },
+          onTarget: { width: 1, direction: 'out', presence: 'required' },
+        },
+      },
+      io_req_valid: {
+        description: 'Processor is sending a valid command to the coprocessor.',
+        wire: {
+          onInitiator: { width: 1, direction: 'in', presence: 'required' },
+          onTarget: { width: 1, direction: 'out', presence: 'required' },
+        },
+      },
+      io_req_ready: {
+        description: 'Coprocessor can accept a command.',
+        wire: {
+          onInitiator: { width: 1, direction: 'out', presence: 'required' },
+          onTarget: { width: 1, direction: 'in', presence: 'required' },
+        },
+      },
+      io_req_bits_data1: {
+        description: 'Source operand 1.',
+        wire: {
+          onInitiator: { width: 'DLEN', direction: 'in', presence: 'required' },
+          onTarget: { width: 'DLEN', direction: 'out', presence: 'required' },
+        },
+      },
+      io_req_bits_data2: {
+        description: 'Source operand 2.',
+        wire: {
+          onInitiator: { width: 'DLEN', direction: 'in', presence: 'required' },
+          onTarget: { width: 'DLEN', direction: 'out', presence: 'required' },
+        },
+      },
+      io_req_bits_data3: {
+        description: 'Source operand 3.',
+        wire: {
+          onInitiator: { width: '2*DLEN', direction: 'in', presence: 'required' },
+          onTarget: { width: '2*DLEN', direction: 'out', presence: 'required' },
+        },
+      },
+      io_req_bits_func6: {
+        description: 'Instruction bits 31..26.',
+        wire: {
+          onInitiator: { width: 6, direction: 'in', presence: 'required' },
+          onTarget: { width: 6, direction: 'out', presence: 'required' },
+        },
+      },
+      io_req_bits_vm: {
+        description: 'Instruction bit 25; when 1, indicates vd is not written.',
+        wire: {
+          onInitiator: { width: 1, direction: 'in', presence: 'required' },
+          onTarget: { width: 1, direction: 'out', presence: 'required' },
+        },
+      },
+      io_req_bits_rs2: {
+        description: 'Instruction bits 24..20 (rs2 field).',
+        wire: {
+          onInitiator: { width: 5, direction: 'in', presence: 'required' },
+          onTarget: { width: 5, direction: 'out', presence: 'required' },
+        },
+      },
+      io_req_bits_rs1: {
+        description: 'Instruction bits 19..15 (rs1 field).',
+        wire: {
+          onInitiator: { width: 5, direction: 'in', presence: 'required' },
+          onTarget: { width: 5, direction: 'out', presence: 'required' },
+        },
+      },
+      io_req_bits_funct3: {
+        description: 'Instruction bits 14..12.',
+        wire: {
+          onInitiator: { width: 3, direction: 'in', presence: 'required' },
+          onTarget: { width: 3, direction: 'out', presence: 'required' },
+        },
+      },
+      io_req_bits_rd: {
+        description: 'Instruction bits 11..7 (rd field).',
+        wire: {
+          onInitiator: { width: 5, direction: 'in', presence: 'required' },
+          onTarget: { width: 5, direction: 'out', presence: 'required' },
+        },
+      },
+      io_req_bits_vsew: {
+        description: 'Current setting of vtype.vsew (i.e., log2(SEW / 8)).',
+        wire: {
+          onInitiator: { width: 3, direction: 'in', presence: 'required' },
+          onTarget: { width: 3, direction: 'out', presence: 'required' },
+        },
+      },
+      io_req_bits_vlmul: {
+        description: 'Current setting of vtype.vlmul (i.e., log2(LMUL) as two’s complement integer).',
+        wire: {
+          onInitiator: { width: 3, direction: 'in', presence: 'required' },
+          onTarget: { width: 3, direction: 'out', presence: 'required' },
+        },
+      },
+      io_req_bits_vl_in_bytes_minus_1: {
+        description: 'Current vector length setting, measured in bytes, minus one (i.e., VL * SEW / 8 - 1).',
+        wire: {
+          onInitiator: { width: 'log2(VLEN)', direction: 'in', presence: 'required' },
+          onTarget: { width: 'log2(VLEN)', direction: 'out', presence: 'required' },
+        },
+      },
+      io_resp_valid: {
+        description: 'Coprocessor is sending a valid response to the processor.',
+        wire: {
+          onInitiator: { width: 1, direction: 'out', presence: 'required' },
+          onTarget: { width: 1, direction: 'in', presence: 'required' },
+        },
+      },
+      io_resp_ready: {
+        description: 'Processor can accept a response.',
+        wire: {
+          onInitiator: { width: 1, direction: 'in', presence: 'required' },
+          onTarget: { width: 1, direction: 'out', presence: 'required' },
+        },
+      },
+      io_resp_bits_data: {
+        description: 'Response data.',
+        wire: {
+          onInitiator: { width: '2*DLEN', direction: 'out', presence: 'required' },
+          onTarget: { width: '2*DLEN', direction: 'in', presence: 'required' },
+        },
+      },
+    },
+  },
+}
