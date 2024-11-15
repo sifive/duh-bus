@@ -1,4 +1,5 @@
 {
+  $schema: 'https://drom.io/duh.json',
   abstractionDefinition: {
     vendor: 'sifive.com',
     library: 'MEM',
