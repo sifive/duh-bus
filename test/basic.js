@@ -14,30 +14,34 @@ describe('basic', () => {
     expect(Object.keys(lib).length).eq(4);
     done();
   });
-  it('schema', done => {
-    const ajv = new Ajv;
-    const validate = ajv
-      .addSchema(schema.defs)
-      .compile(schema.any);
+  it('schema', () => {
+    const validate = new Ajv({ strict: false }).compile(schema.root);
+    const failures = [];
 
-    Object.keys(lib).map(vendor => {
-      const o1 = lib[vendor];
-      Object.keys(o1).map(library => {
-        const o2 = o1[library];
-        Object.keys(o2).map(name => {
-          const o3 = o2[name];
-          Object.keys(o3).map(version => {
-            const o4 = o3[version];
-            if (!validate(o4)) console.log(
-              vendor, library, name, version,
-              o4,
-              validate.errors
-            );
+    Object.keys(lib).forEach(vendor => {
+      Object.keys(lib[vendor]).forEach(library => {
+        Object.keys(lib[vendor][library]).forEach(name => {
+          Object.keys(lib[vendor][library][name]).forEach(version => {
+            const o4 = lib[vendor][library][name][version];
+            if (!validate(o4)) {
+              failures.push(
+                vendor + ':' + library + ':' + name + ':' + version,
+                ...validate.errors.map(e =>
+                  '  ' + (e.keyword + ' at ' + (e.instancePath || '/'))
+                  + ': ' + e.message
+                  + (e.params && e.params.missingProperty
+                    ? ' (missing: ' + e.params.missingProperty + ')'
+                    : '')
+                )
+              );
+            }
           });
         });
       });
     });
-    done();
+
+    expect(failures, failures.length + ' schema violation(s):\n' + failures.join('\n'))
+      .to.eql([]);
   });
 });
 

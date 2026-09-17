@@ -166,7 +166,7 @@
             // width: 'WD' = [1, 2, 4] // deviation was 4
             direction: 'in',
           },
-          defaultValue: -1, // 15 all-ones
+          defaultValue: 4294967295, // all-ones
         },
       },
       PREADY: {

@@ -2,7 +2,7 @@
 'use strict';
 
 const path = require('path');
-const fs = require('fs-extra');
+const fs = require('fs');
 const json5 = require('json5');
 
 function walker (cb, root) {
@@ -36,7 +36,7 @@ async function main () {
 
   fs.writeFileSync('./index.js', '\'use strict\';\n', 'utf8');
   const root = path.resolve(process.cwd(), 'specs');
-  if (fs.pathExistsSync(root)) {
+  if (fs.existsSync(root)) {
 
     walker(async (short, full) => {
       const body = fs.readFileSync(full, 'utf8');
