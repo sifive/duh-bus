@@ -1,19 +1,32 @@
 #!/usr/bin/env node
 'use strict';
 
-const process = require('process');
 const path = require('path');
-const { program } = require('commander');
+const { parseArgs } = require('node:util');
 const dl = require('../lib/amba-pdf-dl.js');
 
-const main = async () => {
-  program
-    .option('--amba-pdf-dl <folder>', 'download AMBA spec PDFs')
-    .parse(process.argv);
+const USAGE = `
+Usage: duh-bus [options]
 
-  const opts = program.opts();
-  if (opts.ambaPdfDl) {
-    await dl(opts.ambaPdfDl);
+Options:
+  --help                        show help
+      --amba-pdf-dl <folder>     download AMBA spec PDFs
+`;
+
+const main = async () => {
+  const { values } = parseArgs({
+    options: {
+      help: { type: 'boolean' },
+      'amba-pdf-dl': { type: 'string' },
+    },
+  });
+
+  if (values.help) {
+    console.log(USAGE);
+    return;
+  }
+  if (values['amba-pdf-dl']) {
+    await dl(values['amba-pdf-dl']);
     return;
   }
   const specPath = path.resolve(__dirname, '../specs');
